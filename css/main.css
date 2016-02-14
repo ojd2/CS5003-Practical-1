@@ -1,0 +1,40 @@
+/* --- Globals --- */
+body {
+    background:#acc4cb !important;
+    color:#fff;
+}
+a {
+   color:grey;
+}
+/* --- Main Navigation --- */
+.menu {
+    margin: 0 auto;
+    text-align: center;
+    width: 50%;
+}
+.subheader {
+    color: #fff;
+    line-height: 1.4;
+    margin-bottom: 0.5rem;
+    margin-top: 0.2rem;
+    font-size: 1.5rem !important;
+}
+/* --- Callout Area --- */
+.callout.primary {
+   background:#79939D !important;
+}
+.callout h1 {
+    font-weight: 700 !important;
+}
+/* --- Stopwatch --- */
+main {
+    margin: 0 auto;
+    text-align: center;
+}
+.button { 
+    background:#666 !important;
+    box-shadow: 0.2px 0.2px  #888;
+}
+
+
+
