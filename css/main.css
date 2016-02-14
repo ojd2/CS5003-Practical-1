@@ -36,5 +36,15 @@ main {
     box-shadow: 0.2px 0.2px  #888;
 }
 
-
+/* --- Delete Button Area --- */
+.delete-area {
+    padding:20px 0;
+}
+/* --- Task Panel Area --- */
+.form-control option {
+    font-size:16px;
+    font-weight:normal;
+    padding:10px 0px;
+    border-bottom:1px solid grey;
+}
 
