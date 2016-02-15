@@ -23,7 +23,7 @@
     
 
     <!-- Let's seperate out our MVC -->
-    <script src="js/main.js"></script>
+    <script src="js/data.js"></script>
     <script src="js/model.js"></script>
     <script src="js/view.js"></script>
     <script src="js/controller.js"></script>
@@ -56,9 +56,6 @@
     	</div>
     </div>
 
-
-    
-
     <!-- <div class="container">
 	    <div class="col-xs-12 text-center">
 
@@ -73,37 +70,11 @@
     </div> -->
     <!-- <br />
     <br /> -->
-    <!-- <div class="container">
-      
-      <div class="col-xs-12 text-center">
-      	
-      	<div class="form-inline">
-	    <div class="form-group">
-	        <input type="text" class="col-xs-6 form-control" name="newModelField" id="newModelField">
-	        <button id="send" class="btn btn-success">Add Task</button><br />
-	    </div>
-	    </div>
-
-	    <div class="delete-area form-inline">
-	    	<div class="form-group">
-		        <button id="minusBtn" class="btn btn-warning">Delete Task</button>
-		        <button id="delAllBtn" class="btn btn-danger">Delete Everything</button>
-	        </div>
-        </div>
-      </div>
-
-      <div class="col-xs-12 text-center">
-        <select id="list" class="form-control text-center" size="10"></select>
-      </div>
-    </div> -->
-
-
-    
 
     <!-- Our application HTML -->
     <div class="container">
       <div id="app-portal" class="col-xs-12 text-center" style="display:none">
-        <h2>User is now signed in to the app using Google+</h2>
+        <h2>You are now signed into app using Google+</h2>
         <div class="clearfix"></div>
         <br />
         <!-- Begin General App HTML elements -->
@@ -115,8 +86,32 @@
               <button class="btn btn-info" id="stop" onclick="pause()">pause</button>
               <button class="btn btn-info" id="clear" onclick="reset()">reset</button>
         </div>
+      
+        <!-- <div class="col-xs-12 text-center">
+            <div class="form-inline">
+                <div class="form-group">
+                    <input type="text" class="col-xs-6 form-control" name="newModelField" id="newModelField">
+                    <button id="send" class="btn btn-success">Add Task</button><br />
+                </div>
+            </div>
+
+          <div class="delete-area form-inline">
+            <div class="form-group">
+                <button id="minusBtn" class="btn btn-warning">Delete Task</button>
+                <button id="delAllBtn" class="btn btn-danger">Delete Everything</button>
+              </div>
+            </div>
+        </div>
+
+        <div class="col-xs-12 text-center">
+            <select id="list" class="form-control text-center" size="10"></select>
+        </div> -->
+
       </div>
-    </div> 
+      <!-- End App Portal -->
+    </div>
+    <!-- End Container -->
+    
     <!-- End application HTML -->
 
     <!-- Load error HTML -->
@@ -159,4 +154,6 @@
   <script src="js/app.js"></script>
   <!-- Load Google Req -->
   <script src="https://apis.google.com/js/client:platform.js?onload=startApp"></script>
+  <!-- Load Google Realtime API -->
+  <script type="text/javascript" src="https://apis.google.com/js/api.js"></script>
 </html>
