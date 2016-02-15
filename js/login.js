@@ -37,13 +37,65 @@ var helper = (function() {
       // Revoke the access token.
       auth2.disconnect();
     },
+    /**
+     * Gets and renders the list of people visible to this app.
+     */
+    people: function() {
+      gapi.client.plus.people.list({
+        'userId': 'me',
+        'collection': 'visible'
+      }).then(function(res) {
+        var people = res.result;
+        $('#visiblePeople').empty();
+        $('#visiblePeople').append('Number of people visible to this app: ' +
+            people.totalItems + '<br/>');
+        for (var personIndex in people.items) {
+          person = people.items[personIndex];
+          $('#visiblePeople').append('<img src="' + person.image.url + '">');
+        }
+      });
+    },
+    /**
+     * Gets and renders the currently signed in user's profile data.
+     */
+    profile: function(){
+      gapi.client.plus.people.get({
+        'userId': 'me'
+      }).then(function(res) {
+        var profile = res.result;
+        console.log(profile);
+        $('#profile').empty();
+        $('#profile').append(
+            $('<p><img src=\"' + profile.image.url + '\"></p>'));
+        $('#profile').append(
+            $('<p>Hello ' + profile.displayName + '!<br />Tagline: ' +
+            profile.tagline + '<br />About: ' + profile.aboutMe + '</p>'));
+        if (profile.emails) {
+          $('#profile').append('<br/>Emails: ');
+          for (var i=0; i < profile.emails.length; i++){
+            $('#profile').append(profile.emails[i].value).append(' ');
+          }
+          $('#profile').append('<br/>');
+        }
+        if (profile.cover && profile.coverPhoto) {
+          $('#profile').append(
+              $('<p><img src=\"' + profile.cover.coverPhoto.url + '\"></p>'));
+        }
+      }, function(err) {
+        var error = err.result;
+        $('#profile').empty();
+        $('#profile').append(error.message);
+      });
+    }
+  };
+})();
 /**
  * jQuery initialization
  */
 $(document).ready(function() {
   $('#disconnect').click(helper.disconnect);
   $('#loaderror').hide();
-  if ($('meta')[0].content == '86159056584-rbv6c6etv8as627l2agkhj0m0v7ck0h6.apps.googleusercontent.com') {
+  if ($('meta')[0].content == 'YOUR_CLIENT_ID') {
     alert('This sample requires your OAuth credentials (client ID) ' +
         'from the Google APIs console:\n' +
         '    https://code.google.com/apis/console/#:access\n\n' +
@@ -65,4 +117,24 @@ var updateSignIn = function() {
     console.log('signed out');
     helper.onSignInCallback(gapi.auth2.getAuthInstance());
   }
+}
+/**
+ * This method sets up the sign-in listener after the client library loads.
+ */
+function startApp() {
+  gapi.load('auth2', function() {
+    gapi.client.load('plus','v1').then(function() {
+      gapi.signin2.render('signin-button', {
+          scope: 'https://www.googleapis.com/auth/plus.login',
+          fetch_basic_profile: false });
+      gapi.auth2.init({fetch_basic_profile: false,
+          scope:'https://www.googleapis.com/auth/plus.login'}).then(
+            function (){
+              console.log('init');
+              auth2 = gapi.auth2.getAuthInstance();
+              auth2.isSignedIn.listen(updateSignIn);
+              auth2.then(updateSignIn);
+            });
+    });
+  });
 }
