@@ -100,10 +100,3 @@ function appendPre(message) {
  var textContent = document.createTextNode(message + '\n');
  pre.appendChild(textContent);
 }
-
-// ----------------------------------------------------------------------------
-// ----------------------------------------------------------------------------
-// Use the gapi.load function to load the required components for app. 
-// ----------------------------------------------------------------------------
-// ----------------------------------------------------------------------------
-//gapi.load("auth:client,drive-realtime,drive-share", callback);
