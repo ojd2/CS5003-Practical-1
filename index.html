@@ -107,6 +107,22 @@
             <select id="list" class="form-control text-center" size="10"></select>
         </div> -->
 
+
+        <div class="container">
+        <div id="output" class="col-xs-12 text-center">
+            <!-- Output here-->
+            <div id="authorize-div" style="display: none">
+              <span>Authorize access to Drive API</span>
+              <!--Button for the user to click to initiate auth sequence -->
+              <button class="btn btn-default" id="authorize-button" onclick="handleAuthClick(event)">
+                Authorize
+              </button>
+          </div>
+
+        </div>
+    </div>
+
+    
       </div>
       <!-- End App Portal -->
     </div>
@@ -126,19 +142,7 @@
 
     <!-- Begin Footer -->
 
-    <div class="container">
-        <div id="output" class="col-xs-12 text-center">
-            <!-- Output here-->
-            <div id="authorize-div" style="display: none">
-              <span>Authorize access to Drive API</span>
-              <!--Button for the user to click to initiate auth sequence -->
-              <button class="btn btn-default" id="authorize-button" onclick="handleAuthClick(event)">
-                Authorize
-              </button>
-          </div>
-
-        </div>
-    </div>
+    
 
     <footer class="footer" style="display:none;">
       <div class="container">
