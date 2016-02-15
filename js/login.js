@@ -20,6 +20,7 @@ onSignInCallback: function(authResult) {
   // Show hidden area of application once signed in.
   if (authResult.isSignedIn.get()) {
     $('#app-portal').show('slow');
+    $('footer').show('slow');
     $('#gConnect').hide();
     $('#sign-in-title').hide();
     // Call our functions for Stopwatch & Append.
@@ -37,6 +38,7 @@ onSignInCallback: function(authResult) {
       console.log('There was an error with your login attempt: ' + authResult['error']);
     }
       $('#app-portal').hide('slow');
+      $('footer').hide('slow');
       $('#gConnect').show();
       $('#sign-in-title').show();
   }

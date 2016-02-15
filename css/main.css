@@ -9,7 +9,6 @@ a {
 .h2, h2 {
     font-size:22px !important;
 }
-
 /* --- Main Navigation --- */
 .menu {
     margin: 0 auto;
@@ -47,7 +46,6 @@ main {
     background:#666 !important;
     box-shadow: 0.2px 0.2px  #888;
 }
-
 /* --- Delete Button Area --- */
 .delete-area {
     padding:20px 0;
@@ -58,4 +56,12 @@ main {
     font-weight:normal;
     padding:10px 0px;
     border-bottom:1px solid grey;
+}
+/* --- Footer Area --- */
+.footer {
+    background-color: #f5f5f5;
+    bottom: 0;
+    height: 60px;
+    position: absolute;
+    width: 100%;
 }
