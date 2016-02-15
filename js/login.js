@@ -95,13 +95,6 @@ var helper = (function() {
 $(document).ready(function() {
   $('#disconnect').click(helper.disconnect);
   $('#loaderror').hide();
-  if ($('meta')[0].content == 'YOUR_CLIENT_ID') {
-    alert('This sample requires your OAuth credentials (client ID) ' +
-        'from the Google APIs console:\n' +
-        '    https://code.google.com/apis/console/#:access\n\n' +
-        'Find and replace YOUR_CLIENT_ID with your client ID.'
-    );
-  }
 });
 /**
  * Handler for when the sign-in state changes.
