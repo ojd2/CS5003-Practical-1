@@ -36,10 +36,9 @@ onSignInCallback: function(authResult) {
       // As an example, you can handle by writing to the console:
       console.log('There was an error with your login attempt: ' + authResult['error']);
     }
-      $('#authResult').append('You have been Logged out.');
       $('#app-portal').hide('slow');
       $('#gConnect').show();
-      $('.sign-in-title').show();
+      $('#sign-in-title').show();
   }
     console.log('authResult', authResult);
 }, // End onSignInCallback()
@@ -53,7 +52,7 @@ disconnect: function() {
   auth2.disconnect();
 },
     
-}; // End return
+}; // End login return
 
 })(); // End login
 
@@ -76,11 +75,11 @@ $(document).ready(function() {
 var updateSignIn = function() {
   console.log('update sign in state');
   if (auth2.isSignedIn.get()) {
-    console.log('signed in');
-    login.onSignInCallback(gapi.auth2.getAuthInstance());
-  } else{
-    console.log('signed out');
-    login.onSignInCallback(gapi.auth2.getAuthInstance());
+      console.log('signed in');
+      login.onSignInCallback(gapi.auth2.getAuthInstance());
+  } else {
+      console.log('signed out');
+      login.onSignInCallback(gapi.auth2.getAuthInstance());
   }
 }
 // ----------------------------------------------------------------------------
