@@ -21,7 +21,7 @@ onSignInCallback: function(authResult) {
   if (authResult.isSignedIn.get()) {
     $('#app-portal').show('slow');
     $('#gConnect').hide();
-    $('.sign-in-title').hide();
+    $('#sign-in-title').hide();
     // Call our functions for Stopwatch & Append.
     // Append our elements to the title h1.
     append();
