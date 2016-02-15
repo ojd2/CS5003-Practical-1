@@ -46,13 +46,12 @@
     <div class="container">
     	<div class="col-xs-12 text-center">
     		<h1>Switch</h1>
-    		<h2>To begin, please sign in:</h2>
+    		<h2 id="sign-in-title">To begin, please sign in:</h2>
     		<br />
         <div id="gConnect">
           <div id="signin-button"></div>
         </div>
-    		<!-- <p>Switch is a cool time keeping management application.</p>
-    		<h3>Add a new project task:</h3> -->
+    		
     	</div>
     </div>
 
@@ -102,8 +101,17 @@
 
   <!-- Our application HTML -->
   <div class="container">
-    <div id="authOps" class="col-xs-12 text-center" style="display:none">
+    <div id="app-portal" class="col-xs-12 text-center" style="display:none">
       <h2>User is now signed in to the app using Google+</h2>
+      <!-- Auth Result Info -->
+      <pre id="authResult"></pre>
+      <div class="clearfix"></div>
+      <br />
+      <!-- Begin General App HTML elements -->
+      <p>Switch is a cool time keeping management application.</p>
+      <h3>Add a new project task:</h3>
+
+      <!-- Include a Sign Out Button -->
       <button class="btn btn-default" id="signOut" onclick="auth2.signOut()">Sign Out</button>
       <p>If the user chooses to disconnect, the app must delete all stored
       information retrieved from Google for the given user.</p>
