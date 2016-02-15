@@ -13,18 +13,26 @@ var helper = (function() {
         $('#authResult').append(' ' + field + ': ' +
             authResult[field] + '<br/>');
       }
+
+      // Show hidden area of application once signed in.
       if (authResult.isSignedIn.get()) {
         $('#authOps').show('slow');
         $('#gConnect').hide();
-        helper.profile();
-        helper.people();
+        
+        // Call our functions for Stopwatch & Append.
+        // Append our elements to the title h1.
+        append();
+        // Call our stopwatch();
+        stopWatch();
+        // Original
+        //helper.people();
       } else {
           if (authResult['error'] || authResult.currentUser.get().getAuthResponse() == null) {
             // There was an error, which means the user is not signed in.
             // As an example, you can handle by writing to the console:
             console.log('There was an error: ' + authResult['error']);
           }
-          $('#authResult').append('Logged out');
+          $('#authResult').append('You have been Logged out');
           $('#authOps').hide('slow');
           $('#gConnect').show();
       }
@@ -40,54 +48,54 @@ var helper = (function() {
     /**
      * Gets and renders the list of people visible to this app.
      */
-    people: function() {
-      gapi.client.plus.people.list({
-        'userId': 'me',
-        'collection': 'visible'
-      }).then(function(res) {
-        var people = res.result;
-        $('#visiblePeople').empty();
-        $('#visiblePeople').append('Number of people visible to this app: ' +
-            people.totalItems + '<br/>');
-        for (var personIndex in people.items) {
-          person = people.items[personIndex];
-          $('#visiblePeople').append('<img src="' + person.image.url + '">');
-        }
-      });
-    },
+    // people: function() {
+    //   gapi.client.plus.people.list({
+    //     'userId': 'me',
+    //     'collection': 'visible'
+    //   }).then(function(res) {
+    //     var people = res.result;
+    //     $('#visiblePeople').empty();
+    //     $('#visiblePeople').append('Number of people visible to this app: ' +
+    //         people.totalItems + '<br/>');
+    //     for (var personIndex in people.items) {
+    //       person = people.items[personIndex];
+    //       $('#visiblePeople').append('<img src="' + person.image.url + '">');
+    //     }
+    //   });
+    // },
     /**
      * Gets and renders the currently signed in user's profile data.
      */
-    profile: function(){
-      gapi.client.plus.people.get({
-        'userId': 'me'
-      }).then(function(res) {
-        var profile = res.result;
-        console.log(profile);
-        $('#profile').empty();
-        $('#profile').append(
-            $('<p><img src=\"' + profile.image.url + '\"></p>'));
-        $('#profile').append(
-            $('<p>Hello ' + profile.displayName + '!<br />Tagline: ' +
-            profile.tagline + '<br />About: ' + profile.aboutMe + '</p>'));
-        if (profile.emails) {
-          $('#profile').append('<br/>Emails: ');
-          for (var i=0; i < profile.emails.length; i++){
-            $('#profile').append(profile.emails[i].value).append(' ');
-          }
-          $('#profile').append('<br/>');
-        }
-        if (profile.cover && profile.coverPhoto) {
-          $('#profile').append(
-              $('<p><img src=\"' + profile.cover.coverPhoto.url + '\"></p>'));
-        }
-      }, function(err) {
-        var error = err.result;
-        $('#profile').empty();
-        $('#profile').append(error.message);
-      });
-    }
-  };
+    // profile: function(){
+    //   gapi.client.plus.people.get({
+    //     'userId': 'me'
+    //   }).then(function(res) {
+    //     var profile = res.result;
+    //     console.log(profile);
+    //     $('#profile').empty();
+    //     $('#profile').append(
+    //         $('<p><img src=\"' + profile.image.url + '\"></p>'));
+    //     $('#profile').append(
+    //         $('<p>Hello ' + profile.displayName + '!<br />Tagline: ' +
+    //         profile.tagline + '<br />About: ' + profile.aboutMe + '</p>'));
+    //     if (profile.emails) {
+    //       $('#profile').append('<br/>Emails: ');
+    //       for (var i=0; i < profile.emails.length; i++){
+    //         $('#profile').append(profile.emails[i].value).append(' ');
+    //       }
+    //       $('#profile').append('<br/>');
+    //     }
+    //     if (profile.cover && profile.coverPhoto) {
+    //       $('#profile').append(
+    //           $('<p><img src=\"' + profile.cover.coverPhoto.url + '\"></p>'));
+    //     }
+    //   }, function(err) {
+    //     var error = err.result;
+    //     $('#profile').empty();
+    //     $('#profile').append(error.message);
+    //   });
+    // }
+  };// End return
 })();
 /**
  * jQuery initialization

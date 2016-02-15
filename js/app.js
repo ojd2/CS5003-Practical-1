@@ -62,10 +62,6 @@ function format() {
     stopWatch();
 }
 
-// Append our elements to the title h1
-append();
-// Call our stopwatch();
-stopWatch();
 
 // Start our append() function to add elements of timer.
 function append() {

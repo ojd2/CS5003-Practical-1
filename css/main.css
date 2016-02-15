@@ -31,7 +31,7 @@ a {
     font-weight: 700 !important;
 }
 /* --- Google Login Button --- */
-#loginBtn {
+#gConnect {
     margin:0 auto;
     padding:0 auto;
     text-align: center;
