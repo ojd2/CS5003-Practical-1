@@ -9,12 +9,18 @@
     <!-- Use title if it's in the page YAML frontmatter -->
     <title>Switch - Time keeping App</title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
-    <script src="http://code.jquery.com/jquery-2.1.4.min.js"></script>
+    
 
     <link href="css/main.css" rel="stylesheet" type="text/css" />
 
     <!-- Load the Realtime JavaScript library -->
     <script type="text/javascript" src="js/auth.js"></script>
+
+    <!-- Load the Google Auth Login library -->
+    <script src="https://apis.google.com/js/platform.js" async defer></script>
+    <meta name="google-signin-client_id" content="86159056584-rbv6c6etv8as627l2agkhj0m0v7ck0h6.apps.googleusercontent.com">
+    <!-- Load the jQuery library -->
+    <script type="text/javascript" src="http://code.jquery.com/jquery-2.1.4.min.js"></script>
 
     <!-- Let's seperate out our MVC -->
     <script src="js/main.js"></script>
@@ -40,8 +46,12 @@
     <div class="container">
     	<div class="col-xs-12 text-center">
     		<h1>Switch</h1>
-    		<p>Switch is a cool time keeping management application.</p>
-    		<h3>Add a new project task:</h3>
+    		<h2>To begin, please sign in:</h2>
+    		<br />
+    		<div id="loginBtn" class="g-signin2" data-onsuccess="onSignIn"></div>
+
+    		<!-- <p>Switch is a cool time keeping management application.</p>
+    		<h3>Add a new project task:</h3> -->
     		
     	</div>
     </div>
@@ -56,6 +66,7 @@
 		    <button class="btn btn-info" id="clear" onclick="reset()">reset</button>
 
     <div class="clearfix"></div>
+    </div>
     <br />
     <br />
     <div class="container">

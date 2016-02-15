@@ -6,6 +6,10 @@ body {
 a {
    color:grey;
 }
+.h2, h2 {
+    font-size:22px !important;
+}
+
 /* --- Main Navigation --- */
 .menu {
     margin: 0 auto;
@@ -25,6 +29,14 @@ a {
 }
 .callout h1 {
     font-weight: 700 !important;
+}
+/* --- Google Login Button --- */
+#loginBtn {
+    margin:0 auto;
+    padding:0 auto;
+    text-align: center;
+    float:none;
+    width:120px;
 }
 /* --- Stopwatch --- */
 main {
@@ -47,4 +59,3 @@ main {
     padding:10px 0px;
     border-bottom:1px solid grey;
 }
-
