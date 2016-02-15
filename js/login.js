@@ -1,10 +1,11 @@
 // ----------------------------------------------------------------------------
 // ----------------------------------------------------------------------------
+// 0. LOGIN MODEL:
+// ----------------------------------------------------------------------------
+// ----------------------------------------------------------------------------
 // Following JS is for the main core functionalities of the CS5003 P1 App.
 // Below is the main login session authentication JS for the application.
 // Uses a mixture of Google's auth API and custom jQuery animations.
-// ----------------------------------------------------------------------------
-// ----------------------------------------------------------------------------
 var auth2 = {};
 var login = (function() {
 return {
@@ -25,11 +26,10 @@ onSignInCallback: function(authResult) {
     $('#sign-in-title').hide();
     // Call our functions for Stopwatch & Append.
     // Append our elements to the title h1.
-    append();
+    
+    // append();
     // Call our stopwatch();
-    stopWatch();
-    // Original
-    //login.people();
+    // stopWatch();
   } 
   else {
     if (authResult['error'] || authResult.currentUser.get().getAuthResponse() == null) {
@@ -43,7 +43,8 @@ onSignInCallback: function(authResult) {
       $('#sign-in-title').show();
   }
     console.log('authResult', authResult);
-}, // End onSignInCallback()
+}, 
+// End onSignInCallback()
 // ----------------------------------------------------------------------------
 // ----------------------------------------------------------------------------
 // Calls the OAuth2 endpoint to disconnect the app for the user.
@@ -54,9 +55,11 @@ disconnect: function() {
   auth2.disconnect();
 },
     
-}; // End login return
+}; 
+// End login return()
 
-})(); // End login
+})(); 
+// End login()
 
 // ----------------------------------------------------------------------------
 // ----------------------------------------------------------------------------
@@ -107,3 +110,4 @@ function startApp() {
     });
   });
 }
+// End startApp()
