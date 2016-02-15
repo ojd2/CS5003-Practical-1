@@ -108,11 +108,13 @@
         <br />
         <!-- Begin General App HTML elements -->
         <h3>Add a new project task:</h3>
-        
-
-
-        <!-- APP HTML ELEMENTS HERE -->
-            
+        <div class="col-xs-12 text-center">
+          <h1 id="time_elem"><time>00:00:00</time></h1>
+              <button id="plusBtn" class="btn btn-default">Add new</button>
+              <button class="btn btn-info" id="start" onclick="stopWatch()">start</button>
+              <button class="btn btn-info" id="stop" onclick="pause()">pause</button>
+              <button class="btn btn-info" id="clear" onclick="reset()">reset</button>
+        </div>
       </div>
     </div> 
     <!-- End application HTML -->
