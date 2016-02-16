@@ -1,7 +1,7 @@
 // Controller
-function ListController(model, view) {
-  this._model = model;
-  this._view = view;
+function ListController(taskModel, taskView) {
+  this._model = taskModel;
+  this._view = taskView;
 
   var _this = this;
 
@@ -10,14 +10,14 @@ function ListController(model, view) {
   });
 
   this._view.addButtonClicked.attach(function () {
-    _this.addItem();
+    _this.addTask();
   });
   this._view.createButtonClicked.attach(function(){
-    _this.createItem();
+    _this.createTask();
   })
 
   this._view.delButtonClicked.attach(function () {
-    _this.delItem();
+    _this.delTask();
   });
   this._view.delAllButtonClicked.attach(function(){
     _this.delAll();

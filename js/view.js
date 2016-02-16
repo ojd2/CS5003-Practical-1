@@ -1,8 +1,8 @@
 // View
-function ListView(model, elements) {
-    this._model    = model;
+function appendTask(taskModel, elements) {
+    this._model    = taskModel;
     this._elements = elements;
-
+    // Set up event handlers
     this.listModified        = new Event(this);
     this.addButtonClicked    = new Event(this);
     this.delButtonClicked    = new Event(this);
@@ -11,10 +11,10 @@ function ListView(model, elements) {
     var _this = this;
 
     // attach model listeners
-    this._model.itemAdded.attach(function () {
+    this._model.taskAdded.attach(function () {
         _this.rebuildList();
     });
-    this._model.itemRemoved.attach(function () {
+    this._model.taskRemoved.attach(function () {
         _this.rebuildList();
     });
 
@@ -37,28 +37,28 @@ function ListView(model, elements) {
     });
 }
 
-ListView.prototype = {
+appendTask.prototype = {
   show : function () {
     this.rebuildList();
   },
 
   rebuildList : function () {
-    var list, items, key;
+    var list, tasks, key;
 
     list = this._elements.list;
     list.html('');
 
-    items = this._model.getItems();
-    for (key in items) {
-      if (items.hasOwnProperty(key)) {
-        list.append($('<option>' + items[key] + '</option>'));
+    tasks = this._model.gettasks();
+    for (key in tasks) {
+      if (tasks.hasOwnProperty(key)) {
+        list.append($('<option>' + tasks[key] + '</option>'));
       }
     }
     this._model.setSelectedIndex(-1);
   }
 };
 
-ListView.prototype.getElements = function() {
+appendTask.prototype.getElements = function() {
   return this._elements;
 }
 

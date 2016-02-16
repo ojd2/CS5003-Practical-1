@@ -1,40 +1,38 @@
 // Model
-function ListModel(items) {
-  this._items = items;
+function ListTasks(tasks) {
+  this._tasks = tasks;
   this._selectedIndex = -1;
 
-  this.itemAdded = new Event(this);
-  this.itemRemoved = new Event(this);
+  this.taskadded = new Event(this);
+  this.taskRemoved = new Event(this);
   this.selectedIndexChanged = new Event(this);
 }
 
-ListModel.prototype = {
-  getItems : function () {
-    return [].concat(this._items);
+ListTasks.prototype = {
+  gettasks : function () {
+    return [].concat(this._tasks);
   },
+  addtask : function (task) {
+    console.log('added task'); 
+  },
+  createtask: function(task){
+    this._tasks.push(task);
+    this.taskAdded.notify({ task : task });
+  },
+  removetaskAt : function (index) {
+    var task;
 
-  addItem : function (item) {
-    
-  },
-  createItem: function(item){
-    this._items.push(item);
-    this.itemAdded.notify({ item : item });
-  },
-  removeItemAt : function (index) {
-    var item;
-
-    item = this._items[index];
-    this._items.splice(index, 1);
-    this.itemRemoved.notify({ item : item });
+    task = this._tasks[index];
+    this._tasks.splice(index, 1);
+    this.taskRemoved.notify({ task : task });
     if (index === this._selectedIndex) {
       this.setSelectedIndex(-1);
     }
   },
-
-  removeAllItems : function() {
+  removeAlltasks : function() {
     this.setSelectedIndex(-1);
-    this._items = [];
-    this.itemRemoved.notify({});
+    this._tasks = [];
+    this.taskRemoved.notify({});
   },
 
   getSelectedIndex : function () {

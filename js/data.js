@@ -1,6 +1,6 @@
 $(function () {
       // Identify Model
-      var model = new ListModel([
+      var taskModel = new ListTasks([
   			      'Cleaning the dishes', 
   			      'Making a Pizza',
   			      'Watching Breaking Bad Season 1',
@@ -8,7 +8,7 @@ $(function () {
   			      'Having a shower'
   		]),
       // Identify View
-      view = new ListView(model, {
+      taskView = new appendTask(taskModel, {
         'list'            : $('#list'), 
         'addButton'       : $('#plusBtn'),
         'createButton'    : $("#send"),
@@ -17,7 +17,7 @@ $(function () {
         'newModelTextField' : $('#newModelField'),
       }),
       // Identify Controller
-      controller = new ListController(model, view);
+      controller = new ListController(taskModel, taskView);
       // Show View()
-      view.show();
+      taskView.show();
  });
