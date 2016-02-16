@@ -21,6 +21,7 @@ onSignInCallback: function(authResult) {
   // Show hidden area of application once signed in.
   if (authResult.isSignedIn.get()) {
     $('#app-portal').show('slow');
+    $('footer').show('slow');
     $('#signOut').show('slow');
     $('#disconnect').show('slow');
     $('#gConnect').hide();
@@ -39,6 +40,7 @@ onSignInCallback: function(authResult) {
       console.log('There was an error with your login attempt: ' + authResult['error']);
     }
       $('#app-portal').hide('slow');
+      $('footer').hide('slow');
       $('#signOut').hide('slow');
       $('#disconnect').hide('slow');
       $('#gConnect').show();
