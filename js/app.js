@@ -42,7 +42,7 @@ var timeData;
 var startBtn = document.getElementById('start');
 var pauseBtn = document.getElementById('pause');
 var resetBtn = document.getElementById('reset');
-
+var data = [];
 
 
 startBtn.onclick = function globalTime() {
@@ -116,7 +116,6 @@ function reset() {
 // Model Tasks
 // ----------------------------------------------------------------------------
 // ----------------------------------------------------------------------------
-
 // Set up some default list tasks subjects for our model.
 function ObserverList(){
   this.observerList = [];
@@ -196,7 +195,6 @@ var controlInput = document.getElementById( "taskName" ),
   removeBtn = document.getElementById( "removeObserver" ),
   container = document.getElementById( "tasksContainer" );
 
-
 // Concrete Subject
 // Extend the controlling checkbox with the Subject class
 extend( controlInput, new Subject() );
@@ -206,7 +204,6 @@ controlInput.onclick = function(){
   controlInput.notify( controlInput.task );
 };
  
-
 var itemValue;
 addBtn.onclick = addNewObserver;
 removeBtn.onclick = removeObserver;
@@ -220,25 +217,24 @@ function addNewObserver(){
   itemValue = document.getElementById( "taskName" );
   value = itemValue.value;
   item.innerHTML = value;
-  //item.innerHTML = itemValue;
- 
-  // Extend the checkbox with the Observer class
-  extend( item, new Observer() );
  
   // Override with custom update behaviour
   item.update = function( value ){
     this.task = value;
   };
- 
-  // Add the new observer to our list of observers
-  // for our main subject
-  controlInput.addObserver( item );
- 
+
   // Append the item to the container
   container.appendChild( item );
+  // Push values into empty data[]
+  data.push(value);
+  console.log(data);
 
 }
 
-function removeObserver(task) {
+function removeObserver() {
+    alert('remove');
+    for (key in data) {
+        console.log(data[key]);
+    }
 
 }
