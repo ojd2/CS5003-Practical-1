@@ -134,14 +134,12 @@ ObserverList.prototype.get = function( index ){
 };
 ObserverList.prototype.indexOf = function( obj, startIndex ){
   var i = startIndex;
- 
   while( i < this.observerList.length ){
     if( this.observerList[i] === obj ){
       return i;
     }
     i++;
   }
- 
   return -1;
 };
  ObserverList.prototype.removeAt = function( index ){
@@ -175,7 +173,7 @@ Subject.prototype.notify = function( context ){
 // The Observer
 function Observer(){
   this.update = function(){
-    
+    // magic 
   };
 }
 
@@ -210,7 +208,6 @@ controlInput.onclick = function(){
  
 
 var itemValue;
-
 addBtn.onclick = addNewObserver;
 removeBtn.onclick = removeObserver;
  
@@ -218,11 +215,10 @@ removeBtn.onclick = removeObserver;
 function addNewObserver(){
   
   // Create a new checkbox to be added
-  var item = document.createElement( "li" );
+  var item = document.createElement( "option" );
   item.className = "list-group-item task-list-item";
   itemValue = document.getElementById( "taskName" );
   value = itemValue.value;
-  console.log(value);
   item.innerHTML = value;
   //item.innerHTML = itemValue;
  
@@ -243,6 +239,6 @@ function addNewObserver(){
 
 }
 
-function removeObserver() {
-  
+function removeObserver(task) {
+
 }
