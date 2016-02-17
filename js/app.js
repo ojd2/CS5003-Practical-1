@@ -232,9 +232,12 @@ function addNewObserver(){
 }
 
 function removeObserver() {
-    alert('remove');
-    for (key in data) {
-        console.log(data[key]);
-    }
-
+   
+    // http://www.thimbleopensource.com/tutorials-snippets/handling-select-items-javascript
+    var selectobject = document.getElementById("tasksContainer");
+    // for (var i=0; i<selectobject.length; i++){
+    //   if (selectobject.options[i].value == itemValue )
+    //   selectobject.remove(i);
+    // }
+    selectobject.remove(selectobject.selectedIndex);
 }
