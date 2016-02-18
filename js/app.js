@@ -204,6 +204,9 @@ var projectValue;
 // Get the document HTML item for the task list area.
 var tasksList = document.getElementById("tasksContainer");
 
+// Global var for project which will be appended.
+var project;
+
 // References to our DOM elements.
 var controlInput = document.getElementById( "projectName" ),
 addBtn = document.getElementById( "addNewProject" ),
@@ -229,7 +232,7 @@ removeBtn.onclick = removeProject;
 // Concrete Observer
 function addProject(){
   // Create a new select option to be added.
-  var project = document.createElement( "option" );
+  project = document.createElement( "option" );
   project.className = "list-group-item project-list-item";
   projectValue = document.getElementById( "projectName" );
   value = projectValue.value;
@@ -281,6 +284,13 @@ addTaskBtn = document.getElementById( "addNewTask" );
 function showTasks() {
     // Fade in tasksContainer.
     $("#tasksContainer").show('slow');
+    alert('Add Task');
+    
+    $('.project-list-item').click(function() {
+        //project.classList.add("active-project");
+        // $("#test").removeClass();
+        $(".project-list-item").toggleClass("active-project");
+    });
 }
 // ----------------------------------------------------------------------------
 // ----------------------------------------------------------------------------
@@ -378,19 +388,28 @@ addTaskBtn.onclick = addTask;
 // Concrete Observer
 function addTask(){
 
-  alert('inside addTask');
-  startBtn.classList.remove("disabled");
-  taskItem = document.getElementById( "taskName" );
-  taskValue = taskItem.value;
-  console.log(taskValue);
-  
-  var $option = $(".project-list-item");
-  $option.text(value + " " + taskValue);
+    //var selectedProject = document.getElementById('projectsContainer').selectedIndex;
 
-  // Override with custom update behaviour
-  taskName.updateTask = function( taskValue ){
-      this.taskName = taskValue;
-  };
+    // Activate our start button.
+    startBtn.classList.remove("disabled");
+
+    // Append our task name to the selectIndex
+    taskItem = document.getElementById( "taskName" );
+    taskValue = taskItem.value;
+    console.log(taskValue);
+    
+    var $option = document.getElementsByClassName("active-project");
+    
+
+    var $option = $('.active-project');
+    $option.text(value + " " + taskValue);
+
+    // Override with custom update behaviour
+    taskName.updateTask = function( taskValue ){
+        this.taskName = taskValue;
+    };
+
+  
 
   // createdProject.appendChild(taskName);
 
@@ -411,7 +430,7 @@ function addTask(){
 // Therefore we must begin with some validation methods. For example, a user
 // should not be able to hit the start button until a task and project has been
 // selected within the DOM. 
-document.getElementById("projectsContainer").onclick=function() {       
-  alert('Project Selected:' + $("#projectsContainer").prop('selectedIndex'));
-}
+     
+  
+
 
