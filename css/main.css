@@ -6,8 +6,14 @@ body {
 a {
    color:grey;
 }
+label {
+    margin-left:5px;
+}
+.h1, h1 {
+    font-size:38px !important;
+}
 .h2, h2 {
-    font-size:22px !important;
+    font-size:28px !important;
 }
 /* --- Main Navigation --- */
 .menu {
@@ -50,7 +56,7 @@ main {
     box-shadow: 0.2px 0.2px  #888;
 }
 /* --- Task Area --- */
-#taskArea {
+#projectArea {
     margin:0 auto;
     padding:0 auto;
     text-align: center;
@@ -60,7 +66,7 @@ main {
     margin-top:30px;
     padding:0px;
 }
-#tasksContainer {
+#projectsContainer {
     text-align: center;
     padding:0px;
     margin:0 auto;
@@ -71,11 +77,28 @@ main {
     margin-top:50px;
     overflow-y:none !important; 
 }
-.task-list-item {
-    background:#ccc;
-    color:#333;
-    border:1px solid #aaa;
+#tasksContainer {
+    text-align: center;
+    padding:0px;
     font-size:16px;
+    margin:20px auto;
+    width:100%;
+    background:#577C88 !important;
+    border-radius:5px;
+    border:none !important;
+    box-shadow:none !important;
+    margin-top:50px;
+    overflow-y:none !important; 
+}
+.task-checkbox {
+    margin-right:5px;
+}
+.task-list-item {
+    background:#019196;
+    color:#fff;
+    border:1px solid #aaa;
+    font-size:18px;
+    font-weight:normal;
     cursor:pointer;
 }
 /* --- Delete Button Area --- */

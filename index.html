@@ -63,7 +63,7 @@
         <div class="clearfix"></div>
         <br />
         <!-- Begin General App HTML elements -->
-        <h3>Add a new project task:</h3>
+        <h3>Create a new project:</h3>
         
       
         <!-- APP TO GO HERE -->
@@ -76,7 +76,24 @@
 
         
      <div class="col-xs-12 text-center">
-        <h2>Add a new task below:</h2>
+        <h2>Add project details:</h2>
+
+          <div id="projectArea" class="text-center">
+          <div class="form-inline">
+            <div class="form-group">
+              <input id="projectName" class="form-control text-center" type="input"/>
+              <button id="addNewObserver" class="btn btn-success">Enter Project</button>
+            </div>
+          </div>
+          
+          <div id="tasksContainer" class="col-xs-12 text-center" style="display:none;">
+              <h4>Please select a task from below:</h4>
+              <div class="checkbox">
+                    <!-- <label>
+                      <input type="checkbox"> Check me out
+                    </label> -->
+              </div>
+          </div>
 
           <div id="stopWatchArea" class="col-xs-12 text-center">
               <h1 id="time_elem"><time>00:00:00</time></h1>
@@ -85,25 +102,17 @@
               <button class="btn btn-info" id="clear" onclick="reset()">reset</button>
               <button class="btn btn-primary" id="stop" onclick="stop()">stop</button>
           </div>
-
-          <div id="taskArea" class="text-center">
-          <div class="form-inline">
-            <div class="form-group">
-              <input id="taskName" class="form-control text-center" type="input"/>
-              <button id="addNewObserver" class="btn btn-success">Submit Task</button>
-            </div>
-          </div>
           <br />
           <br />
           <div class="form-inline">
-            <button id="removeObserver" class="btn btn-warning">Remove Task</button>
+            <button id="removeObserver" class="btn btn-warning">Remove Project</button>
             <button id="removeAllObservers" class="btn btn-danger">Remove All</button>
           </div>
           </div>
         </div>
 
         <div class="col-xs-12">
-                <select id="tasksContainer" multiple class="form-control"></select>
+                <select id="projectsContainer" multiple class="form-control"></select>
         </div>
 
       
