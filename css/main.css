@@ -90,10 +90,7 @@ main {
     margin-top:50px;
     overflow-y:none !important; 
 }
-.task-checkbox {
-    margin-right:5px;
-}
-.task-list-item {
+.project-list-item {
     background:#019196;
     color:#fff;
     border:1px solid #aaa;

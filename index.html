@@ -82,31 +82,33 @@
           <div class="form-inline">
             <div class="form-group">
               <input id="projectName" class="form-control text-center" type="input"/>
-              <button id="addNewObserver" class="btn btn-success">Enter Project</button>
+              <button id="addNewProject" class="btn btn-success">Enter Project</button>
             </div>
           </div>
           
           <div id="tasksContainer" class="col-xs-12 text-center" style="display:none;">
-              <h4>Please select a task from below:</h4>
-              <div class="checkbox">
-                    <!-- <label>
-                      <input type="checkbox"> Check me out
-                    </label> -->
+              <h4>Please create a task:</h4>
+              <div class="form-inline">
+                <div class="form-group">
+                  <input id="taskName" class="form-control text-center" type="input"/>
+                  <button id="addNewTask" class="btn btn-success">Enter Task</button>
+                </div>
               </div>
+              <br>
           </div>
 
           <div id="stopWatchArea" class="col-xs-12 text-center">
               <h1 id="time_elem"><time>00:00:00</time></h1>
-              <button class="btn btn-info" id="start">start</button>
-              <button class="btn btn-info" id="pause" onclick="pause()">pause</button>
-              <button class="btn btn-info" id="clear" onclick="reset()">reset</button>
-              <button class="btn btn-primary" id="stop" onclick="stop()">stop</button>
+              <button class="btn btn-info btn-lg disabled" id="start">start</button>
+              <button class="btn btn-info btn-lg" id="pause" onclick="pause()">pause</button>
+              <button class="btn btn-info btn-lg" id="clear" onclick="reset()">reset</button>
+              <button class="btn btn-primary btn-lg" id="stop" onclick="stop()">stop</button>
           </div>
           <br />
           <br />
           <div class="form-inline">
-            <button id="removeObserver" class="btn btn-warning">Remove Project</button>
-            <button id="removeAllObservers" class="btn btn-danger">Remove All</button>
+            <button id="removeProject" class="btn btn-warning">Remove Project</button>
+            <button id="removeAllProjects" class="btn btn-danger">Remove All</button>
           </div>
           </div>
         </div>
@@ -114,11 +116,6 @@
         <div class="col-xs-12">
                 <select id="projectsContainer" multiple class="form-control"></select>
         </div>
-
-      
-        
-
-
 
     <!-- Load error HTML -->
     <div class="container">
@@ -132,8 +129,6 @@
     <!-- Begin Footer -->
 
     <footer class="footer" style="display:none;">
-      
-        
         <div class="form-group">
           <div class="form-inline">
             <div class="pull-left">

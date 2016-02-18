@@ -6,8 +6,10 @@
 //
 // Component 1: Stopwatch.
 //
-// Component 2: User input area.
-
+// Component 2: User Project Input Area.
+//
+// Component 3: Append Task & Time.
+//
 // Read: http://alistapart.com/article/javascript-mvc
 // Read: https://gist.github.com/sinventor/67dd6159980aca026694
 
@@ -26,9 +28,11 @@
 // Then the controller will decides to appened to the view. The view
 // contains some simple data binding methods which append the time,
 // user task input name, and some other metadata to an area in the HTML.
+
+
 // ----------------------------------------------------------------------------
 // ----------------------------------------------------------------------------
-// Original Timer Plugin
+// Stopwatch Timer Implmentation
 // https://jsfiddle.net/Daniel_Hug/pvk6p/
 // ----------------------------------------------------------------------------
 // ----------------------------------------------------------------------------
@@ -40,39 +44,42 @@ var pauseBtn = document.getElementById('pause');
 var resetBtn = document.getElementById('reset');
 
 
+
+
+// Perform stopwatch methods
 startBtn.onclick = function globalTime() {
-// Set up function to format time.
-function format() {
+  // Set up function to format time.
+  function format() {
     seconds++;
     if (seconds >= 60) {
-        seconds = 0;
-        minutes++;
-        if (minutes >= 60) {
-            minutes = 0;
-            hours++;
-        }
+      seconds = 0;
+      minutes++;
+      if (minutes >= 60) {
+        minutes = 0;
+        hours++;
+      }
     }
-    append();
-    stopWatch();
-}
-// Start our append() function to add elements of timer.
-function append() {
+  append();
+  stopWatch();
+  }
+  // Start our append() function to add elements of timer.
+  function append() {
     h1.textContent = (hours ? hours > 9 ? hours : "0" + hours : "00") + 
     ":" + (minutes ? minutes > 9 ? minutes : "0" + minutes : "00") + 
     ":" + (seconds > 9 ? seconds : "0" + seconds);
-}
-// Stop our stopwatch() function which 
-function stopWatch() {
+  }
+  // Stop our stopwatch() function which 
+  function stopWatch() {
     interval = setTimeout(format, 1000);
-}
-// Call our timer();
-stopWatch();
-appenedTaskName();
-}
+  }
+  // Call our timer();
+  stopWatch();
+  //appenedTaskName();
+} 
+
 
 // Pause function for StopWatch()
 function pause() {
-  // https://developer.mozilla.org/en-US/docs/Web/API/WindowTimers/clearTimeout
   clearTimeout(interval);
   timeData = (hours ? hours > 9 ? hours : "0" + hours : "00") + 
   ":" + (minutes ? minutes > 9 ? minutes : "0" + minutes : "00") + 
@@ -109,78 +116,75 @@ function reset() {
 
 // ----------------------------------------------------------------------------
 // ----------------------------------------------------------------------------
-// Model Tasks
+// Projects Model
 // ----------------------------------------------------------------------------
 // ----------------------------------------------------------------------------
 
 // Set up some default project methods 
 // for our model subject.
-function ObserverList(){
-  this.observerList = [];
+function ProjectList(){
+  this.projectList = [];
 }
-ObserverList.prototype.add = function( obj ){
-  return this.observerList.push( obj );
+ProjectList.prototype.add = function( obj ){
+  return this.projectList.push( obj );
 };
-ObserverList.prototype.count = function(){
-  return this.observerList.length;
+ProjectList.prototype.count = function(){
+  return this.projectList.length;
 };
-ObserverList.prototype.get = function( index ){
-  if( index > -1 && index < this.observerList.length ){
-    return this.observerList[ index ];
+ProjectList.prototype.get = function( index ){
+  if( index > -1 && index < this.projectList.length ){
+    return this.projectList[ index ];
   }
 };
-ObserverList.prototype.indexOf = function( obj, startIndex ){
+ProjectList.prototype.indexOf = function( obj, startIndex ){
   var i = startIndex;
-  while( i < this.observerList.length ){
-    if( this.observerList[i] === obj ){
+  while( i < this.projectList.length ){
+    if( this.projectList[i] === obj ){
       return i;
     }
     i++;
   }
   return -1;
 };
- ObserverList.prototype.removeAt = function( index ){
-  this.observerList.splice( index, 1 );
+ ProjectList.prototype.removeAt = function( index ){
+  this.projectList.splice( index, 1 );
 };
 
 
 // ----------------------------------------------------------------------------
 // ----------------------------------------------------------------------------
-// Controller Tasks
+// Projects Controller
 // ----------------------------------------------------------------------------
 // ----------------------------------------------------------------------------
-function Subject(){
-  this.observers = new ObserverList();
+function ProController(){
+  this.projects = new ProjectList();
 }
  
-Subject.prototype.addObserver = function( observer ){
-  this.observers.add( observer );
+ProController.prototype.addProject = function( project ){
+  this.projects.add( project );
 };
 
-Subject.prototype.removeObserver = function( observer ){
-  this.observers.removeAt( this.observers.indexOf( observer, 0 ) );
+ProController.prototype.removeProject = function( project ){
+  this.projects.removeAt( this.projects.indexOf( project, 0 ) );
 };
 
-Subject.prototype.notify = function( context ){
-  var observerCount = this.observers.count();
-  for(var i=0; i < observerCount; i++){
-    this.observers.get(i).update( context );
+ProController.prototype.notify = function( context ){
+  var projectCount = this.projects.count();
+  for(var i=0; i < projectCount; i++){
+    this.projects.get(i).update( context );
   }
 };
-// The Observer Function.
-function Observer() {
-  this.update = function(){
+// ----------------------------------------------------------------------------
+// ----------------------------------------------------------------------------
+// Generic Connectors
+// ----------------------------------------------------------------------------
+// ----------------------------------------------------------------------------
+// The Project (Observer) Function.
+function Project() {
+  this.updateProject = function(){
     // magic 
   };
 }
-
-// ----------------------------------------------------------------------------
-// ----------------------------------------------------------------------------
-// View Tasks
-// ----------------------------------------------------------------------------
-// ----------------------------------------------------------------------------
-var data = [];
-
 // Extend an object with an extension.
 function extend( obj, extension ){
   for ( var key in extension ){
@@ -188,40 +192,45 @@ function extend( obj, extension ){
     console.log(obj[key]);
   }
 } 
+// ----------------------------------------------------------------------------
+// ----------------------------------------------------------------------------
+// Projects View
+// ----------------------------------------------------------------------------
+// ----------------------------------------------------------------------------
+// Some global variable to store our inputed project names.
+var data = [];
+// Some global variables for our input value.
+var projectValue;
+// Get the document HTML item for the task list area.
+var tasksList = document.getElementById("tasksContainer");
+
 // References to our DOM elements.
 var controlInput = document.getElementById( "projectName" ),
-addBtn = document.getElementById( "addNewObserver" ),
-removeBtn = document.getElementById( "removeObserver" ),
+addBtn = document.getElementById( "addNewProject" ),
+removeBtn = document.getElementById( "removeProject" ),
 container = document.getElementById( "projectsContainer" );
 
 // Concrete Subject which we extend 
 // the controlling select options 
 // with the subject class.
-extend( controlInput, new Subject() );
+extend( controlInput, new ProController() );
  
 // Clicking the select option will trigger 
 // notifications to its observers.
 controlInput.onclick = function(){
-  controlInput.notify( controlInput.task );
+  controlInput.notify( controlInput.project );
 };
- 
 
-
- // Some global variables for our input value.
-var projectValue;
-// Some global tasks users can use to select.
-var tasks = ['Plan Essay', 'Begin Essay', 'Check Bank Account'];
-
-// Create some event listners for our add Task
+// Create some event listners for our add Project
 // method and remove project method.
-addBtn.onclick = addObserver;
-removeBtn.onclick = removeObserver;
+addBtn.onclick = addProject;
+removeBtn.onclick = removeProject;
  
 // Concrete Observer
-function addObserver(){
+function addProject(){
   // Create a new select option to be added.
   var project = document.createElement( "option" );
-  project.className = "list-group-item task-list-item";
+  project.className = "list-group-item project-list-item";
   projectValue = document.getElementById( "projectName" );
   value = projectValue.value;
   project.innerHTML = value;
@@ -231,53 +240,178 @@ function addObserver(){
     return false;
   } else {
     // Override with custom update behaviour
-    project.update = function( value ){
-      this.task = value;
+    project.updateProject = function( value ){
+      this.project = value;
     };
     // Append the project to the container
     container.appendChild(project);
     // Push values into empty data[]
     data.push(value);
     console.log(data);
-    
     //addTime();
     alert('now select task');
     showTasks();
   }
 }
-function removeObserver() {
+function removeProject() {
     // http://www.thimbleopensource.com/tutorials-snippets/handling-select-items-javascript
     var selectobject = document.getElementById("projectsContainer");
     selectobject.remove(selectobject.selectedIndex);
     $("#tasksContainer").hide('slow');
 }
 
-function showTasks() {
-    // Fade in tasksContainer
-    $("#tasksContainer").show('slow');
-    // Set up tasks to be appended.
-    var tasksList = document.getElementById("tasksContainer");
-    for (var task in tasks) {
-        if (tasks.hasOwnProperty(task)) {
-            var pair = tasks[task];
-            var checkbox = document.createElement("input");
-            checkbox.type = "checkbox";
-            checkbox.class = "task-checkbox";
-            checkbox.name = pair;
-            checkbox.value = pair;
-            tasksList.appendChild(checkbox);
-    
-            var label = document.createElement('label')
-            label.htmlFor = pair;
-            label.appendChild(document.createTextNode(pair));
+// ----------------------------------------------------------------------------
+// ----------------------------------------------------------------------------
+// Add Tasks
+// ----------------------------------------------------------------------------
+// ----------------------------------------------------------------------------
+// The following method captures the value from the desired task input bar 
+// and at the same time, upon submit - activates the start button for the
+// stopwatch. From here, the task value is appended to the selected / created
+// project in the select list. 
 
-            tasksList.appendChild(label);
-            tasksList.appendChild(document.createElement("br"));    
-        }
-    }
+// Some global variables.
+var taskValue;
+
+// References to our DOM elements.
+var taskInput = document.getElementById( "taskName" ),
+addTaskBtn = document.getElementById( "addNewTask" );
+
+// Show tasks area after Project creation.
+function showTasks() {
+    // Fade in tasksContainer.
+    $("#tasksContainer").show('slow');
+}
+// ----------------------------------------------------------------------------
+// ----------------------------------------------------------------------------
+// Tasks Model
+// ----------------------------------------------------------------------------
+// ----------------------------------------------------------------------------
+// Set up some default task methods 
+// for our model subject.
+function TaskList(){
+  this.taskList = [];
+}
+
+TaskList.prototype.add = function( obj ){
+  return this.taskList.push( obj );
+};
+
+TaskList.prototype.count = function(){
+  return this.taskList.length;
+};
+
+TaskList.prototype.get = function( index ){
+  if( index > -1 && index < this.taskList.length ){
+    return this.taskList[ index ];
   }
+};
+
+TaskList.prototype.indexOf = function( obj, startIndex ){
+  var i = startIndex;
+  while( i < this.projectList.length ){
+    if( this.taskList[i] === obj ){
+      return i;
+    }
+    i++;
+  }
+  return -1;
+};
+
+TaskList.prototype.removeAt = function( index ){
+  this.taskList.splice( index, 1 );
+};
+
+
+// ----------------------------------------------------------------------------
+// ----------------------------------------------------------------------------
+// Tasks Controller
+// ----------------------------------------------------------------------------
+// ----------------------------------------------------------------------------
+function TaskController(){
+  this.tasks = new TaskList();
+}
+ 
+TaskController.prototype.addTask = function( task ){
+  this.tasks.add( task );
+};
+
+TaskController.prototype.removeTask = function( task ){
+  this.tasks.removeAt( this.tasks.indexOf( task, 0 ) );
+};
+
+TaskController.prototype.notify = function( context ){
+  var taskCount = this.tasks.count();
+  for(var i=0; i < taskCount; i++){
+    this.tasks.get(i).update( context );
+  }
+};
+
+// The Project (Observer) Function.
+function Task() {
+  this.updateTask = function(){
+    // magic 
+  };
+}
+// ----------------------------------------------------------------------------
+// ----------------------------------------------------------------------------
+// Tasks View
+// ----------------------------------------------------------------------------
+// ----------------------------------------------------------------------------
+
+// Concrete Subject which we extend 
+// the controlling select options 
+// with the subject class.
+extend( taskInput, new TaskController() );
+ 
+// Clicking the select option will trigger 
+// notifications to its observers.
+taskInput.onclick = function(){
+  taskInput.notify( taskInput.task );
+};
+
+// Create some event listners for our add Project
+// method and remove project method.
+addTaskBtn.onclick = addTask;
+
+
+// Concrete Observer
+function addTask(){
+
+  alert('inside addTask');
+  startBtn.classList.remove("disabled");
+  taskItem = document.getElementById( "taskName" );
+  taskValue = taskItem.value;
+  console.log(taskValue);
   
-  document.getElementById("projectsContainer").onclick=function() {       
-        alert($("#projectsContainer").prop('selectedIndex'));
+  var $option = $(".project-list-item");
+  $option.text(value + " " + taskValue);
+
+  // Override with custom update behaviour
+  taskName.updateTask = function( taskValue ){
+      this.taskName = taskValue;
+  };
+
+  // createdProject.appendChild(taskName);
+
+}
+
+
+
+// ----------------------------------------------------------------------------
+// ----------------------------------------------------------------------------
+// Append Task & Time
+// ----------------------------------------------------------------------------
+// ----------------------------------------------------------------------------
+
+// The methodology for this was to appened a chosen checkbox task to a selected 
+// project in the projects list area. Once this has been executed, the tasks are 
+// appened into the HTML underneath the desired project. 
+
+// Therefore we must begin with some validation methods. For example, a user
+// should not be able to hit the start button until a task and project has been
+// selected within the DOM. 
+document.getElementById("projectsContainer").onclick=function() {       
+  alert('Project Selected:' + $("#projectsContainer").prop('selectedIndex'));
 }
 
