@@ -42,8 +42,8 @@ var timeData;
 var startBtn = document.getElementById('start');
 var pauseBtn = document.getElementById('pause');
 var resetBtn = document.getElementById('reset');
-
-
+var stopBtn = document.getElementById('stop');
+var addProjectBtn = document.getElementById('addNewProject');
 
 
 // Perform stopwatch methods
@@ -74,18 +74,42 @@ startBtn.onclick = function globalTime() {
   }
   // Call our timer();
   stopWatch();
-  //appenedTaskName();
+  // Also disable the add project button.
+  addProjectBtn.classList.add("disabled");
 } 
 
 
 // Pause function for StopWatch()
 function pause() {
   clearTimeout(interval);
+  // timeData = (hours ? hours > 9 ? hours : "0" + hours : "00") + 
+  // ":" + (minutes ? minutes > 9 ? minutes : "0" + minutes : "00") + 
+  // ":" + (seconds > 9 ? seconds : "0" + seconds);
+  //console.log(timeData);
+  return false;
+}
+
+// Stop function which then appends time
+// to project with active state.
+stopBtn.onclick = function stop() {
+  
+  clearTimeout(interval);
   timeData = (hours ? hours > 9 ? hours : "0" + hours : "00") + 
   ":" + (minutes ? minutes > 9 ? minutes : "0" + minutes : "00") + 
   ":" + (seconds > 9 ? seconds : "0" + seconds);
   console.log(timeData);
+  
+
+  // Append timeData to project with active class.
+  var $time = document.getElementsByClassName("active-project");
+  var $time = $(".active-project");
+  alert("stop");
+  $time.append("<p>" + timeData + "</p>");
+
+  controlInput.classList.remove("disabled");
+  
   return false;
+
 }
 
 // Reset function for StopWatch()
@@ -402,7 +426,7 @@ function addTask(){
     
 
     var $option = $('.active-project');
-    $option.text(value + " " + taskValue);
+    $option.append("<br>" + taskValue);
 
     // Override with custom update behaviour
     taskName.updateTask = function( taskValue ){
