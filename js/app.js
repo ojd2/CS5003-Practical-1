@@ -12,6 +12,7 @@
 //
 // Read: http://alistapart.com/article/javascript-mvc
 // Read: https://gist.github.com/sinventor/67dd6159980aca026694
+// Read: https://addyosmani.com/resources/essentialjsdesignpatterns/book/#observerpatternjavascript
 
 // ----------------------------------------------------------------------------
 // ----------------------------------------------------------------------------
@@ -425,8 +426,6 @@ addTaskBtn.onclick = addTask;
 // Concrete Observer
 function addTask(){
 
-    //var selectedProject = document.getElementById('projectsContainer').selectedIndex;
-
     // Activate our start button.
     if ($(".active-project")[0]){
       startBtn.classList.remove("disabled");
@@ -440,8 +439,6 @@ function addTask(){
     console.log(taskValue);
     
     var $option = document.getElementsByClassName("active-project");
-    
-
     var $option = $('.active-project');
     $option.append("<br>" + "<b>Task:</b> " + taskValue);
 
@@ -449,29 +446,6 @@ function addTask(){
     taskName.updateTask = function( taskValue ){
         this.taskName = taskValue;
     };
-
-  
-
-  // createdProject.appendChild(taskName);
-
 }
-
-
-
-// ----------------------------------------------------------------------------
-// ----------------------------------------------------------------------------
-// Append Task & Time
-// ----------------------------------------------------------------------------
-// ----------------------------------------------------------------------------
-
-// The methodology for this was to appened a chosen checkbox task to a selected 
-// project in the projects list area. Once this has been executed, the tasks are 
-// appened into the HTML underneath the desired project. 
-
-// Therefore we must begin with some validation methods. For example, a user
-// should not be able to hit the start button until a task and project has been
-// selected within the DOM. 
-     
-  
 
 
