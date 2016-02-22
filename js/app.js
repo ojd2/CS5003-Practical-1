@@ -43,7 +43,7 @@ var startBtn = document.getElementById('start');
 var pauseBtn = document.getElementById('pause');
 var resetBtn = document.getElementById('reset');
 var stopBtn = document.getElementById('stop');
-var addProjectBtn = document.getElementById('addNewProject');
+
 
 
 // Perform stopwatch methods
@@ -104,9 +104,17 @@ stopBtn.onclick = function stop() {
   var $time = document.getElementsByClassName("active-project");
   var $time = $(".active-project");
   alert("stop");
-  $time.append("<p>" + timeData + "</p>");
+  $time.append("<p><b>Total Time:</b> " + timeData + "</p>");
 
   controlInput.classList.remove("disabled");
+  $("#tasksContainer").hide('slow');
+  addProjectBtn.classList.remove("disabled");
+  // Call reset after stop.
+  reset();
+  // Remove active-project class to stop multiple
+  // duplicates of appending tasks.
+  $('.active-project').removeClass('active-project');
+  $('.list-group-item').removeClass('list-group-item');
   
   return false;
 
@@ -236,6 +244,8 @@ var controlInput = document.getElementById( "projectName" ),
 addBtn = document.getElementById( "addNewProject" ),
 removeBtn = document.getElementById( "removeProject" ),
 container = document.getElementById( "projectsContainer" );
+var addProjectBtn = document.getElementById('addNewProject');
+var removeAllBtn = document.getElementById('removeAllProjects');
 
 // Concrete Subject which we extend 
 // the controlling select options 
@@ -252,6 +262,7 @@ controlInput.onclick = function(){
 // method and remove project method.
 addBtn.onclick = addProject;
 removeBtn.onclick = removeProject;
+removeAllBtn.onclick = removeAllProjects;
  
 // Concrete Observer
 function addProject(){
@@ -260,23 +271,23 @@ function addProject(){
   project.className = "list-group-item project-list-item";
   projectValue = document.getElementById( "projectName" );
   value = projectValue.value;
-  project.innerHTML = value;
+  project.innerHTML = "<h3>" + value + "</h3>";
+
  
   if (value === '') {
     alert('empty');
     return false;
   } else {
-    // Override with custom update behaviour
+    // Override with custom update behaviour.
     project.updateProject = function( value ){
       this.project = value;
     };
-    // Append the project to the container
+    // Append the project to the container.
     container.appendChild(project);
     // Push values into empty data[]
     data.push(value);
     console.log(data);
-    //addTime();
-    alert('now select task');
+    // Drop down the tasks input area.
     showTasks();
   }
 }
@@ -284,6 +295,11 @@ function removeProject() {
     // http://www.thimbleopensource.com/tutorials-snippets/handling-select-items-javascript
     var selectobject = document.getElementById("projectsContainer");
     selectobject.remove(selectobject.selectedIndex);
+    $("#tasksContainer").hide('slow');
+}
+
+function removeAllProjects() {
+    $(".project-list-item").remove();
     $("#tasksContainer").hide('slow');
 }
 
@@ -308,12 +324,9 @@ addTaskBtn = document.getElementById( "addNewTask" );
 function showTasks() {
     // Fade in tasksContainer.
     $("#tasksContainer").show('slow');
-    alert('Add Task');
     
-    $('.project-list-item').click(function() {
-        //project.classList.add("active-project");
-        // $("#test").removeClass();
-        $(".project-list-item").toggleClass("active-project");
+    $('.list-group-item').click(function() {
+        $(".list-group-item").toggleClass("active-project");
     });
 }
 // ----------------------------------------------------------------------------
@@ -415,7 +428,11 @@ function addTask(){
     //var selectedProject = document.getElementById('projectsContainer').selectedIndex;
 
     // Activate our start button.
-    startBtn.classList.remove("disabled");
+    if ($(".active-project")[0]){
+      startBtn.classList.remove("disabled");
+    } else {
+      alert('sorry please click a project');
+    }
 
     // Append our task name to the selectIndex
     taskItem = document.getElementById( "taskName" );
@@ -426,7 +443,7 @@ function addTask(){
     
 
     var $option = $('.active-project');
-    $option.append("<br>" + taskValue);
+    $option.append("<br>" + "<b>Task:</b> " + taskValue);
 
     // Override with custom update behaviour
     taskName.updateTask = function( taskValue ){
