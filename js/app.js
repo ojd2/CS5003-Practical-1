@@ -227,13 +227,6 @@ ProController.prototype.notify = function( context ){
 // 2.3 Generic Connectors
 // ----------------------------------------------------------------------------
 // ----------------------------------------------------------------------------
-// The Project (Observer) Function. This acts as a simple 'skeleton' 
-// for creating new future observers (projects in this case).
-function Project() {
-  this.updateProject = function(){
-    // All updates happen here.
-  };
-}
 // Extend an object with an extension.
 function extend( obj, extension ){
   for ( var key in extension ){
@@ -409,12 +402,6 @@ TaskController.prototype.notify = function( context ){
     this.tasks.get(i).update( context );
   }
 };
-// The Project (Observer) Function for out taskList.
-function Task() {
-  this.updateTask = function(){
-    // magic 
-  };
-}
 // ----------------------------------------------------------------------------
 // ----------------------------------------------------------------------------
 // Tasks View
