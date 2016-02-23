@@ -452,7 +452,7 @@ function addTask(){
     // with the class 'active-project'.
     var $option = document.getElementsByClassName("active-project");
     var $option = $('.active-project');
-    $option.append('<div class="clearfix"></div>' + "<b>Task:</b> " + taskValue);
+    $option.append('<div class="task-title">' + "<b>Task:</b> " + taskValue + "</div>");
     // Override all observer pattern behaviour with our task values.
     taskName.updateTask = function( taskValue ){
         this.taskName = taskValue;

@@ -106,6 +106,14 @@ main {
     float:left;
     text-align: center;
 }
+.task-title {
+    margin:0 auto;
+    width:500px;
+    height:200px;
+    padding:5px 0;
+    float:left;
+    text-align: center;
+}
 /* --- Delete Button Area --- */
 .delete-area {
     padding:20px 0;
