@@ -299,7 +299,7 @@ function addProject(){
   project.className = "list-group-item project-list-item";
   projectValue = document.getElementById( "projectName" );
   value = projectValue.value;
-  project.innerHTML = "<h3>" + value + "</h3>";
+  project.innerHTML = '<div class="clearfix"></div><h3>' + value + "</h3>";
   // Here we have a simple validation method which we use to identify if
   // the user has inserted any text into the 'Create Project' input bar.
   if (value === '') {
@@ -452,7 +452,7 @@ function addTask(){
     // with the class 'active-project'.
     var $option = document.getElementsByClassName("active-project");
     var $option = $('.active-project');
-    $option.append("<br>" + "<b>Task:</b> " + taskValue);
+    $option.append('<div class="clearfix"></div>' + "<b>Task:</b> " + taskValue);
     // Override all observer pattern behaviour with our task values.
     taskName.updateTask = function( taskValue ){
         this.taskName = taskValue;
