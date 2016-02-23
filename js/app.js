@@ -1,19 +1,17 @@
 // ----------------------------------------------------------------------------
 // ----------------------------------------------------------------------------
-// Following JS is for the main core functionalities of the CS5003 P1 App.
+// Following JS is for the Switch Application.
+// CS5003: Assignment 1
+// Submitted: 23rd February 2016.
+// Student ID: 150022355
+// Note: See report for in-depth key readings for application.
 // ----------------------------------------------------------------------------
 // ----------------------------------------------------------------------------
-//
 // Component 1: Stopwatch.
 //
 // Component 2: User Project Input Area.
 //
 // Component 3: Append Task & Time.
-//
-// Read: http://alistapart.com/article/javascript-mvc
-// Read: https://gist.github.com/sinventor/67dd6159980aca026694
-// Read: https://addyosmani.com/resources/essentialjsdesignpatterns/book/#observerpatternjavascript
-
 // ----------------------------------------------------------------------------
 // ----------------------------------------------------------------------------
 // 1. STOPWATCH COMPONENT
@@ -21,19 +19,18 @@
 // ----------------------------------------------------------------------------
 // This is rather verbose and non MVC, it is a simple timer
 // which we will use to capture time and bind to our user tasks.
-// The only MVC implmentation for the stopwatch are some methods
+// The only MVC implementation for the stopwatch are some methods
 // which extend the stopwatch by use of some simple controller
 // event handlers. These handlers will store the stopwatch time upon
 // click. For example: If a user hit's start and then hit's 'stop' -
 // the current time displayed will be passed through via controller. 
-// Then the controller will decides to appened to the view. The view
+// Then the controller will decides to appended to the view. The view
 // contains some simple data binding methods which append the time,
 // user task input name, and some other metadata to an area in the HTML.
 
 // ----------------------------------------------------------------------------
 // ----------------------------------------------------------------------------
 // 0. Stopwatch Timer Implmentation
-// https://jsfiddle.net/Daniel_Hug/pvk6p/
 // ----------------------------------------------------------------------------
 // ----------------------------------------------------------------------------
 // Set up public variables for the stopwatch to implement. We begin by setting 
@@ -202,9 +199,9 @@ ProjectList.prototype.indexOf = function( obj, startIndex ){
 // 2.2 Projects Controller
 // ----------------------------------------------------------------------------
 // ----------------------------------------------------------------------------
-// Next comes our controller, which models the created subject (projectList) 
+// Next comes our controller, which models the created subject (ProjectList) 
 // and connects our prototype models together with our view functions. 
-// For example, we inherit our projecList and give the projecList the ability 
+// For example, we inherit our ProjectList and give the ProjectList the ability 
 // to add, remove or notify observers on the observer list. 
 function ProController(){
   this.projects = new ProjectList();
@@ -251,10 +248,9 @@ function extend( obj, extension ){
 // ----------------------------------------------------------------------------
 // The projects view area is where we extend and execute our inherited 
 // prototypes. We do this by using concrete observer functions. The functions 
-// below are what we use to build upon our subject and appened all changes to 
+// below are what we use to build upon our subject and appended all changes to 
 // the applications HTML. First we start with a global array variable. 
-// This iscreated to store our 
-// inputed project names. 
+// This is created to store our inputed project names. 
 var data = [];
 // A global variable for our users input value is stored. 
 // We need this to append into our project object. 
@@ -267,7 +263,7 @@ var tasksList = document.getElementById("tasksContainer");
 var project;
 // Here we make some key references to some of our DOM elements. The selected 
 // elements our a applications buttons. This buttons provide and call numerous 
-// concrete observers in our code to execute tasks upon our subject (projectList).
+// concrete observers in our code to execute tasks upon our subject (ProjectList).
 var controlInput = document.getElementById( "projectName" ),
 addBtn = document.getElementById( "addNewProject" ),
 removeBtn = document.getElementById( "removeProject" ),
@@ -290,7 +286,7 @@ removeBtn.onclick = removeProject;
 removeAllBtn.onclick = removeAllProjects;
 // Begin our concrete observers. Each concrete observer stores a reference 
 // to the concrete subject. From here, we ensure that any state
-// of change is consistent with the subject's (projectList) model above.
+// of change is consistent with the subject's (ProjectList) model above.
 function addProject(){
   // We will append our project objects as select options. With select
   // options we have a far more flexible way of manipulating the HTML and
@@ -303,7 +299,7 @@ function addProject(){
   // Here we have a simple validation method which we use to identify if
   // the user has inserted any text into the 'Create Project' input bar.
   if (value === '') {
-    alert('empty');
+    alert('Error! You have not added Project Name?');
     return false;
   } 
   // If the user has entered any text into the input bar area, then our 
@@ -349,7 +345,6 @@ function removeAllProjects() {
 // stopwatch. From here, the task value is appended to the selected / created
 // project in the select list. However first we must show and drop down our
 // input bar once a created has been created.
-
 // The following variable stores the task value from the input bar.
 var taskValue;
 // Next we reference some more of our DOM elements. These two elements are 
@@ -363,7 +358,7 @@ function showTasks() {
     // Fade in tasksContainer.
     $("#tasksContainer").show('slow');
     // This is a crucial component for the program. The toggle function below
-    // appeneds a class to our created project. This only happens when a user
+    // appended's a class to our created project. This only happens when a user
     // selects a chosen project to assign a task with. Reasons for doing 
     // this are to stop duplicating any appending values. One way of doing this
     // is by differentiating the created projects in the list. By adding a unique
@@ -405,7 +400,6 @@ TaskList.prototype.count = function(){
 function TaskController(){
   this.tasks = new TaskList();
 }
- 
 TaskController.prototype.addTask = function( task ){
   this.tasks.add( task );
 };
@@ -415,7 +409,7 @@ TaskController.prototype.notify = function( context ){
     this.tasks.get(i).update( context );
   }
 };
-// The Project (Observer) Function.
+// The Project (Observer) Function for out taskList.
 function Task() {
   this.updateTask = function(){
     // magic 
@@ -427,7 +421,8 @@ function Task() {
 // ----------------------------------------------------------------------------
 // ----------------------------------------------------------------------------
 // We perform another extension for connecting our controller functions 
-// to our view model.
+// to our view model. This acts in the same way as appending projects to 
+// the HTML. 
 extend( taskInput, new TaskController() );
 // Clicking the select option will trigger notifications to its observers.
 taskInput.onclick = function(){
@@ -435,25 +430,28 @@ taskInput.onclick = function(){
 };
 // Create some event listners for our 'addProject' method.
 addTaskBtn.onclick = addTask;
-
-// Concrete Observer for adding tasks is now implemented.
+// Concrete Observer for adding tasks to our subject is now implemented.
 function addTask(){
-    // Activate our start button.
+    // Activate our start button. We only want users to begin the timer 
+    // once all our eggs are in one basket. So, when a project has been
+    // created and task has been appended to the project, the timer is 
+    // enabled to begin. This is for a UI perspective.
     if ($(".active-project")[0]){
       startBtn.classList.remove("disabled");
     } else {
-      alert('sorry please click a project');
+      alert('Sorry! Please click on a empty project');
     }
-    // Append our task name to the selectIndex
+    // Append our task name to the selectIndex of our clicked project.
     taskItem = document.getElementById( "taskName" );
     taskValue = taskItem.value;
     console.log(taskValue);
-    // Now appened task name to the selected index of our chosen project 
-    // with the class 'active-project'.
+    // Now appened task name to the selected index of our clicked project 
+    // with the class 'active-project'. This is done to assure that the 
+    // new task does not get appended to every live project in the subject.
     var $option = document.getElementsByClassName("active-project");
     var $option = $('.active-project');
     $option.append(" <b>Task:</b> " + taskValue);
-    // Override all observer pattern behaviour with our task values.
+    // Override all observer behaviour with our new custom task values.
     taskName.updateTask = function( taskValue ){
         this.taskName = taskValue;
     };
