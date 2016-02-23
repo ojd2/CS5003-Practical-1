@@ -107,7 +107,7 @@ stopBtn.onclick = function stop() {
   // with the 'active-project' class in the HTML select list.
   var $time = document.getElementsByClassName("active-project");
   var $time = $(".active-project");
-  $time.append("<p><b>Total Time:</b> " + timeData + "</p>");
+  $time.append(" <p><b>Total Time:</b> " + timeData + "</p>");
   controlInput.classList.remove("disabled");
   $("#tasksContainer").hide('slow');
   addProjectBtn.classList.remove("disabled");
@@ -299,7 +299,7 @@ function addProject(){
   project.className = "list-group-item project-list-item";
   projectValue = document.getElementById( "projectName" );
   value = projectValue.value;
-  project.innerHTML = '<div class="project-title"><h3>' + value + "</h3></div>";
+  project.innerHTML = '<h3>Project: ' + value + "</h3>";
   // Here we have a simple validation method which we use to identify if
   // the user has inserted any text into the 'Create Project' input bar.
   if (value === '') {
@@ -452,7 +452,7 @@ function addTask(){
     // with the class 'active-project'.
     var $option = document.getElementsByClassName("active-project");
     var $option = $('.active-project');
-    $option.append('<div class="task-title">' + "<b>Task:</b> " + taskValue + "</div>");
+    $option.append(" <b>Task:</b> " + taskValue);
     // Override all observer pattern behaviour with our task values.
     taskName.updateTask = function( taskValue ){
         this.taskName = taskValue;
