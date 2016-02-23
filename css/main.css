@@ -98,6 +98,12 @@ main {
     font-weight:normal;
     cursor:pointer;
 }
+.project-title {
+    margin:0 auto;
+    width:100%;
+    padding:5px 0;
+    text-align: center;
+}
 /* --- Delete Button Area --- */
 .delete-area {
     padding:20px 0;

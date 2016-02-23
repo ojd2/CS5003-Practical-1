@@ -299,7 +299,7 @@ function addProject(){
   project.className = "list-group-item project-list-item";
   projectValue = document.getElementById( "projectName" );
   value = projectValue.value;
-  project.innerHTML = '<div class="clearfix"></div><h3>' + value + "</h3>";
+  project.innerHTML = '<h3 class="project-title">' + value + "</h3>";
   // Here we have a simple validation method which we use to identify if
   // the user has inserted any text into the 'Create Project' input bar.
   if (value === '') {
