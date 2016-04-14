@@ -11,14 +11,14 @@ Note: See report for in-depth key readings for application.
 ### Component 1: Stopwatch.
 
 This is rather verbose and non MVC, it is a simple timer
-which we will use to capture time and bind to our user tasks.
+that we will use to capture time and bind to our user tasks.
 The only MVC implementation for the stopwatch are some methods
-which extend the stopwatch by use of some simple controller
+that extend the stopwatch by use of some simple controller
 event handlers. These handlers will store the stopwatch time upon
 click. For example: If a user hit's start and then hit's 'stop' -
 the current time displayed will be passed through via controller. 
 Then the controller will decides to appended to the view. The view
-contains some simple data binding methods which append the time,
+contains some simple data binding methods that append the time,
 user task input name, and some other metadata to an area in the HTML.
 
 
@@ -93,8 +93,8 @@ in between adding tasks and when the stop watch timer is currently running.
 addProjectBtn.classList.add("disabled");
 } // End onClick()
 ```
-Next, we have a simple pause function which uses the ```clearTimeout``` routine 
-this time. This is another JavaScript routine which simply clears everything 
+Next, we have a simple pause function that uses the ```clearTimeout``` routine 
+this time. This is another JavaScript routine that simply clears everything 
 bar the appended incremented values.
 ```javascript
 function pause() {
@@ -135,7 +135,7 @@ $('.list-group-item').removeClass('list-group-item');
   return false;
 }
 ```
-Reset function for the timer, which simply overwrites appended HTML DOM elements 
+Reset function for the timer, that simply overwrites appended HTML DOM elements 
 with our new time: ```00:00:00```. This acts like a simple reset updates the UI.
 
 ```javascript
@@ -149,11 +149,11 @@ function reset() {
 
 ### 2. The Observer MVC Pattern.
 
-A MVC approach which aims to describe data within JavaScript. The idea is to create more modularity and seperation. Popular MVC pattern Observer & Listners was researched for this assignment.
+A MVC approach that aims to describe data within JavaScript. The idea is to create more modularity and seperation. Popular MVC pattern Observer & Listners was researched for this assignment.
 
 The code itself is derived from the Observer pattern. The pattern follows 
 some logical principles, first we begin with an object (known as a subject), 
-which keeps a universal list of objects depending on its observers. 
+that keeps a universal list of objects depending on its observers. 
 Subsequently, by doing this, the pattern can automatically notifying the 
 observers of any changes to state. This makes it a perfect MVC model to 
 implement for a project / task timer management system. Why? Well quite 
@@ -168,7 +168,7 @@ simply, when a subject needs to notify the observers about a change of state
 Set up some default project methods, this will act as our first subject.
 A subject maintains a list of observers, facilitates adding or removing 
 observers. In this case, this will be keeping track of adding projects and 
-removing projects which get appended to our projects container in the HTML.
+removing projects that get appended to our projects container in the HTML.
 ```javascript
 function ProjectList(){
   this.projectList = [];
@@ -176,7 +176,7 @@ function ProjectList(){
 ```
 Using ```prototype```'s to inherit object instances. The First prototype is for 
 adding projects. Projects will be created as objects ```(obj)``` and pushed onto
-our inherited subject. The subject will then contain objects which can 
+our inherited subject. The subject will then contain objects that can 
 be later manipulated. 
 ```javascript
 ProjectList.prototype.add = function( obj ){
@@ -227,7 +227,7 @@ ProjectList.prototype.removeAt = function( index ){
 ### 2.2 Projects Controller
 
 
-Next comes our controller, which models the created subject (ProjectList) 
+Next comes our controller, that models the created subject (ProjectList) 
 and connects our prototype models together with our view functions. 
 For example, we inherit our ProjectList and give the ProjectList the ability 
 to add, remove or notify observers on the observer list. 
@@ -242,7 +242,7 @@ ProController.prototype.addProject = function( project ){
   this.projects.add( project );
 };
 ```
-Next we have a function which is created for removing projects.
+Next we have a function that is created for removing projects.
 ```javascript
 ProController.prototype.removeProject = function( project ){
   this.projects.removeAt( this.projects.indexOf( project, 0 ) );
@@ -286,7 +286,7 @@ Get the document HTML item for the task list area.
 var tasksList = document.getElementById("tasksContainer");
 ```
 
-Global variable for project which will be appended. This can then be appended 
+Global variable for project that will be appended. This can then be appended 
 to the projects container in the HTML. From here the input value of any user 
 is added and presented.
 ```javascript
@@ -303,9 +303,9 @@ container = document.getElementById( "projectsContainer" );
 var addProjectBtn = document.getElementById('addNewProject');
 var removeAllBtn = document.getElementById('removeAllProjects');
 ```
-Our concrete subject, which we ```extend``` by controlling the select options 
+Our concrete subject, that we ```extend``` by controlling the select options 
 ```appended projects``` with the subject's class. This basically broadcasts 
-or notifys any observers on any changes of state, which then stores 
+or notifys any observers on any changes of state, that then stores 
 the state and updates our model. This allows us to implement our 
 concrete observers further down.
 ```javascript
@@ -336,7 +336,7 @@ function addProject(){
   projectValue = document.getElementById( "projectName" );
   value = projectValue.value;
   project.innerHTML = '<h3>Project: ' + value + "</h3>";
-  // Here we have a simple validation method which we use to identify if
+  // Here we have a simple validation method that we use to identify if
   // the user has inserted any text into the 'Create Project' input bar.
   if (value === '') {
     alert('Error! You have not added Project Name?');
@@ -357,13 +357,13 @@ function addProject(){
     data.push(value);
     console.log(data);
     // Now we can drop down the tasks input area. This will display to the users
-    // another input bar which is only to be used for tasks belonging to the chosen
+    // another input bar that is only to be used for tasks belonging to the chosen
     // project in the container. The following code below calls the function showTasks().
     showTasks();
   }
 }
 ```
-We set up another concrete observer which is used for removing a particular object / project from the list. This uses some simple jQuery functionality. 
+We set up another concrete observer that is used for removing a particular object / project from the list. This uses some simple jQuery functionality. 
 ```javascript
 function removeProject() {
     var selectobject = document.getElementById("projectsContainer");
@@ -422,7 +422,7 @@ For our tasks to be appended and added, we must create another core subject
 to model. Because of the observer / listner MVC, we can just replicate our 
 projects model and our concrete observers. This is because we are using a 
 simillar pattern such as adding tasks. So, first we create a new subject 
-which we will call ```TaskList```, which will store all our appended task values 
+that we will call ```TaskList```, that will store all our appended task values 
 to the selected projects only.  
 ```javascript
 function TaskList(){
