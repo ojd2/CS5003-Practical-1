@@ -15,9 +15,9 @@ that we will use to capture time and bind to our user tasks.
 The only MVC implementation for the stopwatch are some methods
 that extend the stopwatch by use of some simple controller
 event handlers. These handlers will store the stopwatch time upon
-click. For example: If a user hit's start and then hit's 'stop' -
-the current time displayed will be passed through via controller. 
-Then the controller will decides to appended to the view. The view
+click. For example: If a user hit's ```start``` and then hit's ```stop``` -
+the current time displayed will be passed through via the controller. 
+Then the controller will decide to appended to the view. The view
 contains some simple data binding methods that append the time,
 user task input name, and some other metadata to an area in the HTML.
 
@@ -25,10 +25,10 @@ user task input name, and some other metadata to an area in the HTML.
 
 ### 0. Stopwatch Timer Implmentation
 Set up public variables for the stopwatch to implement. We begin by setting 
-up our timer variables for seconds, minutes, hours and a global interval. 
+up our timer variables for ```seconds```, ```minutes```, ```hours``` and a ```global interval```. 
 We also include some references to our HTML DOM elements for the stopwatch 
 buttons. Our ```timeData``` variable will be used for storing the time when a 
-user hits the stop button. 
+user hits the ```stop``` button. 
 
 ```javascript
 var h1 = document.getElementById('time_elem'),seconds = 0, minutes = 0, hours = 0, interval;
@@ -39,7 +39,7 @@ var resetBtn = document.getElementById('reset');
 var stopBtn = document.getElementById('stop');
 ```
 
-Perform stopwatch methods when a user clicks start. When a user clicks start
+Perform stopwatch methods when a user clicks ```start```. When a user clicks start
 we begin with incrementing our seconds, minutes and hours using the following
 global time calculations. First function below is used for formatting.
 
@@ -88,7 +88,7 @@ Call the function again for performing the routine.
 stopWatch();
 ```
 Also disable the add project button. We do not want users adding projects
-in between adding tasks and when the stop watch timer is currently running.
+in between adding tasks and when the ```stop``` watch timer is currently running.
 ```javascript
 addProjectBtn.classList.add("disabled");
 } // End onClick()
@@ -103,7 +103,7 @@ function pause() {
 }
 ```
 
-Our stop function is executed upon click as well. From here we pause the time again using the ```clearTimeout``` routine. Our ```timeData``` variable stores the current incremented values and then we append the data to our chosen project in the ProjectList subject created below.
+Our ```stop``` function is executed upon click as well. From here we pause the time again using the ```clearTimeout``` routine. Our ```timeData``` variable stores the current incremented values and then we append the data to our chosen project in the ProjectList subject created below.
 
 ```javascript
 stopBtn.onclick = function stop() {
@@ -122,11 +122,11 @@ controlInput.classList.remove("disabled");
 $("#tasksContainer").hide('slow');
 addProjectBtn.classList.remove("disabled");
 ```
-Call reset after stop button is clicked.
+Call reset after ```stop``` button is clicked.
  ```javascript
 reset();
 ```
-Remove ```active-project``` class to stop multiple duplicates of appending tasks.
+Remove ```active-project``` class to ```stop``` multiple duplicates of appending tasks.
 
 ```javascript
 $('.active-project').removeClass('active-project');
@@ -273,7 +273,7 @@ function extend( obj, extension ){
 
 ### 2.4 Projects View
 
-The projects view area is where we extend and execute our inherited prototypes. We do this by using concrete observer functions. The functions below are what we use to build upon our subject and appended all changes to the applications HTML. First we start with a global array variable. This is created to store our inputed project names. 
+The projects view area is where we extend and execute our inherited prototypes. We do this by using concrete observer functions. The functions below are what we use to build upon our subject and appended all changes to the applications HTML. First we ```start``` with a global array variable. This is created to store our inputed project names. 
 ```javascript
 var data = [];
 ```
@@ -382,7 +382,7 @@ function removeAllProjects() {
 ### 3. Task model & task creation.
 
 The following method captures the value from the desired task input bar 
-and at the same time, upon submit - activates the start button for the
+and at the same time, upon submit - activates the ```start``` button for the
 stopwatch. From here, the task value is appended to the selected / created
 project in the select list. However first we must show and drop down our
 input bar once a created has been created.
@@ -406,7 +406,7 @@ function showTasks() {
     // This is a crucial component for the program. The toggle function below
     // appended's a class to our created project. This only happens when a user
     // selects a chosen project to assign a task with. Reasons for doing 
-    // this are to stop duplicating any appending values. One way of doing this
+    // this are to ```stop``` duplicating any appending values. One way of doing this
     // is by differentiating the created projects in the list. By adding a unique
     // class to a selected project, it enables any task to be appended to that 
     // particular project.
@@ -481,7 +481,7 @@ addTaskBtn.onclick = addTask;
 Concrete Observer for adding tasks to our subject is now implemented.
 ```javascript
 function addTask(){
-    // Activate our start button. We only want users to begin the timer 
+    // Activate our ```start``` button. We only want users to begin the timer 
     // once all our eggs are in one basket. So, when a project has been
     // created and task has been appended to the project, the timer is 
     // enabled to begin. This is for a UI perspective.
