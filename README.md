@@ -10,25 +10,13 @@ Note: See report for in-depth key readings for application.
 
 ### Component 1: Stopwatch.
 
-This is rather verbose and non MVC, it is a simple timer
-that we will use to capture time and bind to our user tasks.
-The only MVC implementation for the stopwatch are some methods
-that extend the stopwatch by use of some simple controller
-event handlers. These handlers will store the stopwatch time upon
-click. For example: If a user hits ```start``` and then hits ```stop``` -
-the current time displayed will be passed through via the controller. 
-Then the controller will decide to appended to the view. The view
-contains some simple data binding methods that append the time,
-user task input name, and some other metadata to an area in the HTML.
+This is rather verbose and non MVC, it is a simple timer that we will use to capture time and bind to our user tasks. The only MVC implementation for the stopwatch are some methods that extend the stopwatch by use of some simple controller event handlers. These handlers will store the stopwatch time upon click. For example: If a user hits ```start``` and then hits ```stop``` the current time displayed will be passed through via the controller. Then the controller will decide to appended to the view. The view contains some simple data binding methods that append the time, user task input name, and some other metadata to an area in the HTML.
 
 
 
 ### 0. Stopwatch Timer Implmentation
-Set up public variables for the stopwatch to implement. We begin by setting 
-up our timer variables for ```seconds```, ```minutes```, ```hours``` and a ```global interval```. 
-We also include some references to our HTML DOM elements for the stopwatch 
-buttons. Our ```timeData``` variable will be used for storing the time when a 
-user hits the ```stop``` button. 
+
+Set up public variables for the stopwatch to implement. We begin by setting up our timer variables for ```seconds```, ```minutes```, ```hours``` and a ```global interval```. We also include some references to our HTML DOM elements for the stopwatch buttons. Our ```timeData``` variable will be used for storing the time when a user hits the ```stop``` button. 
 
 ```javascript
 var h1 = document.getElementById('time_elem'),seconds = 0, minutes = 0, hours = 0, interval;
@@ -39,9 +27,7 @@ var resetBtn = document.getElementById('reset');
 var stopBtn = document.getElementById('stop');
 ```
 
-Perform stopwatch methods when a user clicks ```start```. When a user clicks start
-we begin with incrementing our seconds, minutes and hours using the following
-global time calculations. First function below is used for formatting.
+Perform stopwatch methods when a user clicks ```start```. When a user clicks start we begin with incrementing our seconds, minutes and hours using the following global time calculations. First function below is used for formatting.
 
 ```javascript
 startBtn.onclick = function globalTime() {
@@ -57,10 +43,7 @@ startBtn.onclick = function globalTime() {
     }
 ```
 
-We now call our append and stopWatch functions. These two functions act like 
-```the view``` model would in a MVC. They simply append the formatted increments
-from above and add to the HTML. This does our magic and makes the counter tick. 
-The stopWatch function is called at this point because it uses the JavaScript
+We now call our append and stopWatch functions. These two functions act like ```the view``` model would in a MVC. They simply append the formatted increments from above and add to the HTML. This does our magic and makes the counter tick. The stopWatch function is called at this point because it uses the JavaScript
 
 ```javascript
 'setTimeout' routine.  
@@ -69,7 +52,8 @@ The stopWatch function is called at this point because it uses the JavaScript
   } // End format()
   ```
   
-As previously mentioned, the append function below starts with our timer values all set to ```0```, before being incremented.
+As previously mentioned, the append function below starts with our timer values all set to ```0```,before being incremented.
+
 ```javascript
 function append() {
     h1.textContent = (hours ? hours > 9 ? hours : "0" + hours : "00") + 
@@ -78,24 +62,27 @@ function append() {
   }
  ```
 Here is our function for utilising the ```setTimeout``` routine.
+
 ```javascript
 function stopWatch() {
     interval = setTimeout(format, 1000);
  }
  ``` 
+
 Call the function again for performing the routine.
+
 ```javascript
 stopWatch();
 ```
-Also disable the add project button. We do not want users adding projects
-in between adding tasks and when the ```stop``` watch timer is currently running.
+Also disable the add project button. We do not want users adding projects in between adding tasks and when the ```stop``` watch timer is currently running.
+
 ```javascript
 addProjectBtn.classList.add("disabled");
 } // End onClick()
 ```
-Next, we have a simple pause function that uses the ```clearTimeout``` routine 
-this time. This is another JavaScript routine that simply clears everything 
-bar the appended incremented values.
+
+Next, we have a simple pause function that uses the ```clearTimeout``` routine this time. This is another JavaScript routine that simply clears everything bar the appended incremented values.
+
 ```javascript
 function pause() {
   clearTimeout(interval);
@@ -113,7 +100,9 @@ stopBtn.onclick = function stop() {
   ":" + (seconds > 9 ? seconds : "0" + seconds);
   console.log(timeData);
  ```
+
 Append ```timeData``` to project with active class. Time can only be appended to objects with the ```active-project``` class in the HTML select list.
+
 ```javascript
 var $time = document.getElementsByClassName("active-project");
 var $time = $(".active-project");
@@ -135,8 +124,7 @@ $('.list-group-item').removeClass('list-group-item');
   return false;
 }
 ```
-Reset function for the timer, that simply overwrites appended HTML DOM elements 
-with our new time: ```00:00:00```. This acts like a simple reset updates the UI.
+Reset function for the timer, that simply overwrites appended HTML DOM elements with our new time: ```00:00:00```. This acts like a simple reset updates the UI.
 
 ```javascript
 function reset() {
@@ -151,47 +139,36 @@ function reset() {
 
 A MVC approach that aims to describe data within JavaScript. The idea is to create more modularity and seperation. Popular MVC pattern Observer & Listners was researched for this assignment.
 
-The code itself is derived from the Observer pattern. The pattern follows 
-some logical principles, first we begin with an object (known as a subject), 
-that keeps a universal list of objects depending on its observers. 
-Subsequently, by doing this, the pattern can automatically notifying the 
-observers of any changes to state. This makes it a perfect MVC model to 
-implement for a project / task timer management system. Why? Well quite 
-simply, when a subject needs to notify the observers about a change of state
-(deleting an object) happening, it signals a notification to the observers 
-(the data releated is then easily manipulated and structured).
+The code itself is derived from the Observer pattern. The pattern follows some logical principles, first we begin with an object (known as a subject), that keeps a universal list of objects depending on its observers.  Subsequently, by doing this, the pattern can automatically notifying the  observers of any changes to state. This makes it a perfect MVC model to implement for a project / task timer management system. Why? Well quite simply, when a subject needs to notify the observers about a change of state (deleting an object) happening, it signals a notification to the observers (the data releated is then easily manipulated and structured).
 
 
 
 ### 2.1 Projects Model & Subject.
 
-Set up some default project methods, this will act as our first subject.
-A subject maintains a list of observers, facilitates adding or removing 
-observers. In this case, this will be keeping track of adding projects and 
-removing projects that get appended to our projects container in the HTML.
+Set up some default project methods, this will act as our first subject. A subject maintains a list of observers, facilitates adding or removing observers. In this case, this will be keeping track of adding projects and removing projects that get appended to our projects container in the HTML.
+
 ```javascript
 function ProjectList(){
   this.projectList = [];
 }
 ```
-Using ```prototype```'s to inherit object instances. The First prototype is for 
-adding projects. Projects will be created as objects ```(obj)``` and pushed onto
-our inherited subject. The subject will then contain objects that can 
-be later manipulated. 
+
+Using ```prototype```'s to inherit object instances. The First prototype is for adding projects. Projects will be created as objects ```(obj)``` and pushed onto our inherited subject. The subject will then contain objects that can be later manipulated. 
+
 ```javascript
 ProjectList.prototype.add = function( obj ){
   return this.projectList.push( obj );
 };
 ```
-Next we have a count ```prototype``` function which simply keeps track of 
-all objects created and stored into our inherited subject.
+Next we have a count ```prototype``` function which simply keeps track of all objects created and stored into our inherited subject.
+
 ```javascript
 ProjectList.prototype.count = function(){
   return this.projectList.length;
 };
 ```
-Our get prototype function is for identifying the selected index in our
-list of objects created (in this case our projects). 
+Our get prototype function is for identifying the selected index in our list of objects created (in this case our projects). 
+
 ```javascript
 ProjectList.prototype.get = function( index ){
   if( index > -1 && index < this.projectList.length ){
@@ -199,9 +176,9 @@ ProjectList.prototype.get = function( index ){
   }
 };
 ```
-Our ```indexOf prototype``` is for identifying our list and designating their 
-index numbers. This is mainly for keeping track of all objects. Acts like 
-dynamic filling system.
+
+Our ```indexOf prototype``` is for identifying our list and designating their index numbers. This is mainly for keeping track of all objects. Acts like dynamic filling system.
+
 ```javascript
 ProjectList.prototype.indexOf = function( obj, startIndex ){
   var i = startIndex;
@@ -215,9 +192,8 @@ ProjectList.prototype.indexOf = function( obj, startIndex ){
 };
 ```
 
-The ```removeAt``` prototype function is for identifying the selected index and
-then manipulates our list by removing the selected object. This makes use of
-of a splice function upon our objects. 
+The ```removeAt``` prototype function is for identifying the selected index and then manipulates our list by removing the selected object. This makes use of a splice function upon our objects. 
+
 ```javascript
 ProjectList.prototype.removeAt = function( index ){
   this.projectList.splice( index, 1 );
@@ -227,29 +203,29 @@ ProjectList.prototype.removeAt = function( index ){
 ### 2.2 Projects Controller
 
 
-Next comes our controller, that models the created subject (ProjectList) 
-and connects our prototype models together with our view functions. 
-For example, we inherit our ProjectList and give the ProjectList the ability 
-to add, remove or notify observers on the observer list. 
+Next comes our controller, that models the created subject ```ProjectList``` and connects our prototype models together with our view functions. For example, we inherit our ProjectList and give the ```ProjectList``` the ability to add, remove or notify observers on the observer list. 
+
 ```javascript
 function ProController(){
   this.projects = new ProjectList();
 }
 ```
 We define our first function. This is for adding projects to our subject.
+
 ```javascript
 ProController.prototype.addProject = function( project ){
   this.projects.add( project );
 };
 ```
 Next we have a function that is created for removing projects.
+
 ```javascript
 ProController.prototype.removeProject = function( project ){
   this.projects.removeAt( this.projects.indexOf( project, 0 ) );
 };
 ```
-Finally, we have a notify function for notifying all observers for 
-different states of change.
+Finally, we have a notify function for notifying all observers for different states of change.
+
 ```javascript
 ProController.prototype.notify = function( context ){
   var projectCount = this.projects.count();
@@ -262,6 +238,7 @@ ProController.prototype.notify = function( context ){
 ### 2.3 Generic Connectors
 
 Extend an object with an extension.
+
 ```javascript
 function extend( obj, extension ){
   for ( var key in extension ){
@@ -286,15 +263,13 @@ Get the document HTML item for the task list area.
 var tasksList = document.getElementById("tasksContainer");
 ```
 
-Global variable for project that will be appended. This can then be appended 
-to the projects container in the HTML. From here the input value of any user 
-is added and presented.
+Global variable for project that will be appended. This can then be appended  to the projects container in the HTML. From here the input value of any user is added and presented.
+
 ```javascript
 var project;
 ```
-Here we make some key references to some of our DOM elements. The selected 
-elements our a applications buttons. This buttons provide and call numerous 
-concrete observers in our code to execute tasks upon our subject ```ProjectList```.
+Here we make some key references to some of our DOM elements. The selected elements our a applications buttons. This buttons provide and call numerous concrete observers in our code to execute tasks upon our subject ```ProjectList```.
+
 ```javascript
 var controlInput = document.getElementById( "projectName" ),
 addBtn = document.getElementById( "addNewProject" ),
@@ -303,29 +278,29 @@ container = document.getElementById( "projectsContainer" );
 var addProjectBtn = document.getElementById('addNewProject');
 var removeAllBtn = document.getElementById('removeAllProjects');
 ```
-Our concrete subject, that we ```extend``` by controlling the select options 
-```appended projects``` with the subject's class. This basically broadcasts 
-or notifys any observers on any changes of state, that then stores 
-the state and updates our model. This allows us to implement our 
-concrete observers further down.
+Our concrete subject, that we ```extend``` by controlling the select options ```appended projects``` with the subject's class. This basically broadcasts or notifys any observers on any changes of state, that then stores the state and updates our model. This allows us to implement our concrete observers further down.
+
 ```javascript
 extend( controlInput, new ProController() );
 ```
+
 Clicking the select option will trigger notifications to the observers.
+
 ```javascript
 controlInput.onclick = function(){
   controlInput.notify( controlInput.project );
 };
 ```
 Some event listners for our ```add```, ```remove```, ```removeAll``` methods are set up.
+
 ```javascript
 addBtn.onclick = addProject;
 removeBtn.onclick = removeProject;
 removeAllBtn.onclick = removeAllProjects;
 ```
-Begin our concrete observers. Each concrete observer stores a reference 
-to the concrete subject. From here, we ensure that any state
-of change is consistent with the subject's ```ProjectList``` model above.
+
+Begin our concrete observers. Each concrete observer stores a reference to the concrete subject. From here, we ensure that any state of change is consistent with the subject's ```ProjectList``` model above.
+
 ```javascript
 function addProject(){
   // We will append our project objects as select options. With select
@@ -364,6 +339,7 @@ function addProject(){
 }
 ```
 We set up another concrete observer that is used for removing a particular object / project from the list. This uses some simple jQuery functionality. 
+
 ```javascript
 function removeProject() {
     var selectobject = document.getElementById("projectsContainer");
@@ -372,6 +348,7 @@ function removeProject() {
 }
 ```
 Similliar to the concrete observer function above, but this function instead removes all current objects listed using some more jQuery functionality.
+
 ```javascript
 function removeAllProjects() {
     $(".project-list-item").remove();
@@ -381,24 +358,20 @@ function removeAllProjects() {
 
 ### 3. Task model & task creation.
 
-The following method captures the value from the desired task input bar 
-and at the same time, upon submit - activates the ```start``` button for the
-stopwatch. From here, the task value is appended to the selected / created
-project in the select list. However first we must show and drop down our
-input bar once a created has been created.
-The following variable stores the task value from the input bar.
+The following method captures the value from the desired task input bar and at the same time, upon submit - activates the ```start``` button for the stopwatch. From here, the task value is appended to the selected / created project in the select list. However first we must show and drop down our
+input bar once a created has been created. The following variable stores the task value from the input bar.
+
 ```javascript 
 var taskValue;
 ```
-Next we reference some more of our DOM elements. These two elements are 
-related to our tasks area. We reference both the task input and the add
-task buttons.
+Next we reference some more of our DOM elements. These two elements are related to our tasks area. We reference both the task input and the add task buttons.
+
 ```javascript
 var taskInput = document.getElementById( "taskName" ),
 addTaskBtn = document.getElementById( "addNewTask" );
 ```
-As previously mentioned, the first thing we must do is show the tasks area 
-after new project creation. The code below uses some simple jQuery animation.
+As previously mentioned, the first thing we must do is show the tasks area after new project creation. The code below uses some simple jQuery animation.
+
 ```javascript
 function showTasks() {
     // Fade in tasksContainer.
@@ -418,26 +391,25 @@ function showTasks() {
 
 ### 3.1 Tasks Subject & Model.
 
-For our tasks to be appended and added, we must create another core subject
-to model. Because of the observer / listner MVC, we can just replicate our 
-projects model and our concrete observers. This is because we are using a 
-simillar pattern such as adding tasks. So, first we create a new subject 
+For our tasks to be appended and added, we must create another core subject to model. Because of the observer / listner MVC, we can just replicate our projects model and our concrete observers. This is because we are using a simillar pattern such as adding tasks. So, first we create a new subject 
 that we will call ```TaskList```, that will store all our appended task values 
 to the selected projects only.  
+
 ```javascript
 function TaskList(){
   this.taskList = [];
 }
 ```
-As previously mentioned, we create some ```prototype``` functions for adding a 
-task to a selected project. Tasks can only be added to selected projects with
-the ```active-project``` class. 
+
+As previously mentioned, we create some ```prototype``` functions for adding a task to a selected project. Tasks can only be added to selected projects with the ```active-project``` class. 
+
 ```javascript
 TaskList.prototype.add = function( obj ){
   return this.taskList.push( obj );
 };
 ```
 Another prototype function for counting tasks.
+
 ```javascript
 TaskList.prototype.count = function(){
   return this.taskList.length;
@@ -462,23 +434,25 @@ TaskController.prototype.notify = function( context ){
 
 ### Tasks View
 
-We perform another extension for connecting our controller functions 
-to our view model. This acts in the same way as appending projects to 
-the HTML. 
+We perform another extension for connecting our controller functions to our view model. This acts in the same way as appending projects to the HTML.
+
 ```javascript
 extend( taskInput, new TaskController() );
 ```
 Clicking the select option will trigger notifications to its observers.
+
 ```javascript
 taskInput.onclick = function(){
   taskInput.notify( taskInput.task );
 };
 ```
 Create some event listners for our ```addProject``` method.
+
 ```javascript
 addTaskBtn.onclick = addTask;
 ```
 Concrete Observer for adding tasks to our subject is now implemented.
+
 ```javascript
 function addTask(){
     // Activate our ```start``` button. We only want users to begin the timer 
