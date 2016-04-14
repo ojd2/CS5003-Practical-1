@@ -77,7 +77,7 @@ function append() {
     ":" + (seconds > 9 ? seconds : "0" + seconds);
   }
  ```
-Here is our function for utilising the 'setTimeout' routine.
+Here is our function for utilising the ```setTimeout``` routine.
 ```javascript
 function stopWatch() {
     interval = setTimeout(format, 1000);
@@ -103,7 +103,7 @@ function pause() {
 }
 ```
 
-Our ```stop``` function is executed upon click as well. From here we pause the time again using the ```clearTimeout``` routine. Our ```timeData``` variable stores the current incremented values and then we append the data to our chosen project in the ProjectList subject created below.
+Our ```stop``` function is executed upon click as well. From here we pause the time again using the ```clearTimeout``` routine. Our ```timeData``` variable stores the current incremented values and then we append the data to our chosen project in the ```ProjectList``` subject created below.
 
 ```javascript
 stopBtn.onclick = function stop() {
