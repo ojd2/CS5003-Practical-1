@@ -10,7 +10,7 @@ Note: See report for in-depth key readings for application.
 
 ### Component 1: Stopwatch.
 
-This is a rather verbose and non MVC, it is a simple timer
+This is rather verbose and non MVC, it is a simple timer
 which we will use to capture time and bind to our user tasks.
 The only MVC implementation for the stopwatch are some methods
 which extend the stopwatch by use of some simple controller
