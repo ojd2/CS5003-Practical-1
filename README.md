@@ -203,7 +203,7 @@ ProjectList.prototype.removeAt = function( index ){
 ### 2.2 Projects Controller
 
 
-Next comes our controller, that models the created subject ```ProjectList``` and connects our prototype models together with our view functions. For example, we inherit our ProjectList and give the ```ProjectList``` the ability to add, remove or notify observers on the observer list. 
+Next comes our controller, that models the created subject ```ProjectList``` and connects our prototype models together with our view functions. For example, we inherit our ```ProjectList``` and give the ```ProjectList``` the ability to add, remove or notify observers on the observer list. 
 
 ```javascript
 function ProController(){
