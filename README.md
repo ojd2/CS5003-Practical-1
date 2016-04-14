@@ -15,7 +15,7 @@ that we will use to capture time and bind to our user tasks.
 The only MVC implementation for the stopwatch are some methods
 that extend the stopwatch by use of some simple controller
 event handlers. These handlers will store the stopwatch time upon
-click. For example: If a user hit's ```start``` and then hit's ```stop``` -
+click. For example: If a user hits ```start``` and then hits ```stop``` -
 the current time displayed will be passed through via the controller. 
 Then the controller will decide to appended to the view. The view
 contains some simple data binding methods that append the time,
